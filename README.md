@@ -2,7 +2,6 @@
 
 <div align="center">
 
-![Media Player](https://img.shields.io/badge/Media-Player-blueviolet?style=for-the-badge&logo=play&logoColor=white)
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
@@ -55,9 +54,7 @@ Interactive Media Player is a modern, responsive web-based media player that sup
 
 ## 🚀 Demo
 
-![Media Player Demo](https://via.placeholder.com/800x400/667eea/ffffff?text=Interactive+Media+Player+Demo)
-
-> **🌟 Live Demo**: [**View the Interactive Media Player in Action**](https://media-player-ten-self.vercel.app/) 
+> **🌟 Live Demo**: [**Media Player**](https://media-player-ten-self.vercel.app/) 
 > 
 > *Experience the full functionality of the media player with live video and audio playback!*
 
@@ -218,8 +215,8 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 ## 👨‍💻 Author
 
 **Pushkar Kumar Saini**
-- GitHub: [@yourusername](https://github.com/yourusername)
-- Email: your.email@example.com
+- GitHub: [@pushkarkumarsaini2006](https://github.com/pushkarkumarsaini2006)
+- Email: pushkarkumarsaini2006@gmail.com
 
 ## 🙏 Acknowledgments
 
@@ -229,10 +226,10 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 ## 📊 Project Stats
 
-![GitHub stars](https://img.shields.io/github/stars/yourusername/Media-Player?style=social)
-![GitHub forks](https://img.shields.io/github/forks/yourusername/Media-Player?style=social)
-![GitHub issues](https://img.shields.io/github/issues/yourusername/Media-Player)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/yourusername/Media-Player)
+![GitHub stars](https://img.shields.io/github/stars/pushkarkumarsaini2006/Media-Player?style=social)
+![GitHub forks](https://img.shields.io/github/forks/pushkarkumarsaini2006/Media-Player?style=social)
+![GitHub issues](https://img.shields.io/github/issues/pushkarkumarsaini2006/Media-Player)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/pushkarkumarsaini2006/Media-Player)
 
 ---
 
@@ -240,6 +237,6 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 **⭐ Star this repo if you find it helpful!**
 
-Made with ❤️ by [Pushkar Kumar Saini](https://github.com/yourusername)
+Made with ❤️ by [Pushkar Kumar Saini](https://github.com/pushkarkumarsaini2006)
 
 </div>
