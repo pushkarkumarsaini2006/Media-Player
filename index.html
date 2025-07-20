@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Media Player</title>
+    <title>Full Stack Web Development Media Player</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="styles.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -11,8 +11,8 @@
 <body>
     <div class="container">
         <header>
-            <h1><i class="fas fa-play-circle"></i> Interactive Media Player</h1>
-            <p>Your daily dose of entertainment</p>
+            <h1><i class="fas fa-play-circle"></i> Full Stack Web Development Media Player</h1>
+            <p>Your complete learning companion for web development</p>
         </header>
 
         <!-- Media Controls -->
@@ -28,12 +28,12 @@
             <h2><i class="fas fa-video"></i> Video Collection</h2>
             <div class="media-grid" id="videoGrid">
                 <div class="media-item">
-                    <video width="300" src="1.mp4" controls>
-                        <source src="1.mp4" type="video/mp4">
+                    <video width="300" src="html-css-basics.mp4" controls>
+                        <source src="html-css-basics.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                     <div class="media-info">
-                        <h3>Video 1</h3>
+                        <h3>HTML & CSS Fundamentals</h3>
                         <div class="media-controls-individual">
                             <button class="mini-btn play-btn"><i class="fas fa-play"></i></button>
                             <button class="mini-btn pause-btn"><i class="fas fa-pause"></i></button>
@@ -43,12 +43,12 @@
                     </div>
                 </div>
                 <div class="media-item">
-                    <video width="300" src="2.mp4" controls>
-                        <source src="2.mp4" type="video/mp4">
+                    <video width="300" src="javascript-essentials.mp4" controls>
+                        <source src="javascript-essentials.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                     <div class="media-info">
-                        <h3>Video 2</h3>
+                        <h3>JavaScript Essentials</h3>
                         <div class="media-controls-individual">
                             <button class="mini-btn play-btn"><i class="fas fa-play"></i></button>
                             <button class="mini-btn pause-btn"><i class="fas fa-pause"></i></button>
@@ -58,12 +58,12 @@
                     </div>
                 </div>
                 <div class="media-item">
-                    <video width="300" src="3.mp4" controls>
-                        <source src="3.mp4" type="video/mp4">
+                    <video width="300" src="react-tutorial.mp4" controls>
+                        <source src="react-tutorial.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                     <div class="media-info">
-                        <h3>Video 3</h3>
+                        <h3>React Development</h3>
                         <div class="media-controls-individual">
                             <button class="mini-btn play-btn"><i class="fas fa-play"></i></button>
                             <button class="mini-btn pause-btn"><i class="fas fa-pause"></i></button>
@@ -73,12 +73,12 @@
                     </div>
                 </div>
                 <div class="media-item">
-                    <video width="300" src="4.mp4" controls>
-                        <source src="4.mp4" type="video/mp4">
+                    <video width="300" src="nodejs-backend.mp4" controls>
+                        <source src="nodejs-backend.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                     <div class="media-info">
-                        <h3>Video 4</h3>
+                        <h3>Node.js Backend</h3>
                         <div class="media-controls-individual">
                             <button class="mini-btn play-btn"><i class="fas fa-play"></i></button>
                             <button class="mini-btn pause-btn"><i class="fas fa-pause"></i></button>
@@ -88,12 +88,12 @@
                     </div>
                 </div>
                 <div class="media-item">
-                    <video width="300" src="5.mp4" controls>
-                        <source src="5.mp4" type="video/mp4">
+                    <video width="300" src="database-mongodb.mp4" controls>
+                        <source src="database-mongodb.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                     <div class="media-info">
-                        <h3>Video 5</h3>
+                        <h3>MongoDB Database</h3>
                         <div class="media-controls-individual">
                             <button class="mini-btn play-btn"><i class="fas fa-play"></i></button>
                             <button class="mini-btn pause-btn"><i class="fas fa-pause"></i></button>
@@ -103,12 +103,42 @@
                     </div>
                 </div>
                 <div class="media-item">
-                    <video width="300" src="6.mp4" controls>
-                        <source src="6.mp4" type="video/mp4">
+                    <video width="300" src="fullstack-deployment.mp4" controls>
+                        <source src="fullstack-deployment.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                     <div class="media-info">
-                        <h3>Video 6</h3>
+                        <h3>Full Stack Deployment</h3>
+                        <div class="media-controls-individual">
+                            <button class="mini-btn play-btn"><i class="fas fa-play"></i></button>
+                            <button class="mini-btn pause-btn"><i class="fas fa-pause"></i></button>
+                            <button class="mini-btn mute-btn"><i class="fas fa-volume-up"></i></button>
+                            <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="1">
+                        </div>
+                    </div>
+                </div>
+                <div class="media-item">
+                    <video width="300" src="express-server-setup.mp4" controls>
+                        <source src="express-server-setup.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="media-info">
+                        <h3>Express.js Server Setup</h3>
+                        <div class="media-controls-individual">
+                            <button class="mini-btn play-btn"><i class="fas fa-play"></i></button>
+                            <button class="mini-btn pause-btn"><i class="fas fa-pause"></i></button>
+                            <button class="mini-btn mute-btn"><i class="fas fa-volume-up"></i></button>
+                            <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="1">
+                        </div>
+                    </div>
+                </div>
+                <div class="media-item">
+                    <video width="300" src="git-version-control.mp4" controls>
+                        <source src="git-version-control.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="media-info">
+                        <h3>Git Version Control</h3>
                         <div class="media-controls-individual">
                             <button class="mini-btn play-btn"><i class="fas fa-play"></i></button>
                             <button class="mini-btn pause-btn"><i class="fas fa-pause"></i></button>
@@ -126,12 +156,12 @@
             <div class="audio-grid" id="audioGrid">
                 <div class="audio-item">
                     <div class="audio-player">
-                        <audio src="1.mp3">
-                            <source src="1.mp3" type="audio/mpeg">
+                        <audio src="web-dev-podcast-intro.mp3">
+                            <source src="web-dev-podcast-intro.mp3" type="audio/mpeg">
                             Your browser does not support the audio tag.
                         </audio>
                         <div class="audio-info">
-                            <h3>Track 1</h3>
+                            <h3>Web Dev Podcast - Introduction</h3>
                             <div class="progress-container">
                                 <div class="progress-bar">
                                     <div class="progress"></div>
@@ -149,12 +179,12 @@
                 </div>
                 <div class="audio-item">
                     <div class="audio-player">
-                        <audio src="2.mp3">
-                            <source src="2.mp3" type="audio/mpeg">
+                        <audio src="javascript-tips-audio.mp3">
+                            <source src="javascript-tips-audio.mp3" type="audio/mpeg">
                             Your browser does not support the audio tag.
                         </audio>
                         <div class="audio-info">
-                            <h3>Track 2</h3>
+                            <h3>JavaScript Pro Tips</h3>
                             <div class="progress-container">
                                 <div class="progress-bar">
                                     <div class="progress"></div>
@@ -172,12 +202,12 @@
                 </div>
                 <div class="audio-item">
                     <div class="audio-player">
-                        <audio src="3.mp3">
-                            <source src="3.mp3" type="audio/mpeg">
+                        <audio src="react-state-management.mp3">
+                            <source src="react-state-management.mp3" type="audio/mpeg">
                             Your browser does not support the audio tag.
                         </audio>
                         <div class="audio-info">
-                            <h3>Track 3</h3>
+                            <h3>React State Management</h3>
                             <div class="progress-container">
                                 <div class="progress-bar">
                                     <div class="progress"></div>
@@ -195,12 +225,12 @@
                 </div>
                 <div class="audio-item">
                     <div class="audio-player">
-                        <audio src="4.mp3">
-                            <source src="4.mp3" type="audio/mpeg">
+                        <audio src="api-development-guide.mp3">
+                            <source src="api-development-guide.mp3" type="audio/mpeg">
                             Your browser does not support the audio tag.
                         </audio>
                         <div class="audio-info">
-                            <h3>Track 4</h3>
+                            <h3>API Development Guide</h3>
                             <div class="progress-container">
                                 <div class="progress-bar">
                                     <div class="progress"></div>
@@ -218,12 +248,12 @@
                 </div>
                 <div class="audio-item">
                     <div class="audio-player">
-                        <audio src="5.mp3">
-                            <source src="5.mp3" type="audio/mpeg">
+                        <audio src="database-design-principles.mp3">
+                            <source src="database-design-principles.mp3" type="audio/mpeg">
                             Your browser does not support the audio tag.
                         </audio>
                         <div class="audio-info">
-                            <h3>Track 5</h3>
+                            <h3>Database Design Principles</h3>
                             <div class="progress-container">
                                 <div class="progress-bar">
                                     <div class="progress"></div>
@@ -241,12 +271,58 @@
                 </div>
                 <div class="audio-item">
                     <div class="audio-player">
-                        <audio src="6.mp3">
-                            <source src="6.mp3" type="audio/mpeg">
+                        <audio src="devops-deployment-tips.mp3">
+                            <source src="devops-deployment-tips.mp3" type="audio/mpeg">
                             Your browser does not support the audio tag.
                         </audio>
                         <div class="audio-info">
-                            <h3>Track 6</h3>
+                            <h3>DevOps & Deployment Tips</h3>
+                            <div class="progress-container">
+                                <div class="progress-bar">
+                                    <div class="progress"></div>
+                                </div>
+                                <span class="time-display">0:00 / 0:00</span>
+                            </div>
+                        </div>
+                        <div class="audio-controls">
+                            <button class="audio-btn play-btn"><i class="fas fa-play"></i></button>
+                            <button class="audio-btn pause-btn"><i class="fas fa-pause"></i></button>
+                            <button class="audio-btn mute-btn"><i class="fas fa-volume-up"></i></button>
+                            <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="1">
+                        </div>
+                    </div>
+                </div>
+                <div class="audio-item">
+                    <div class="audio-player">
+                        <audio src="css-grid-flexbox-guide.mp3">
+                            <source src="css-grid-flexbox-guide.mp3" type="audio/mpeg">
+                            Your browser does not support the audio tag.
+                        </audio>
+                        <div class="audio-info">
+                            <h3>CSS Grid & Flexbox Guide</h3>
+                            <div class="progress-container">
+                                <div class="progress-bar">
+                                    <div class="progress"></div>
+                                </div>
+                                <span class="time-display">0:00 / 0:00</span>
+                            </div>
+                        </div>
+                        <div class="audio-controls">
+                            <button class="audio-btn play-btn"><i class="fas fa-play"></i></button>
+                            <button class="audio-btn pause-btn"><i class="fas fa-pause"></i></button>
+                            <button class="audio-btn mute-btn"><i class="fas fa-volume-up"></i></button>
+                            <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="1">
+                        </div>
+                    </div>
+                </div>
+                <div class="audio-item">
+                    <div class="audio-player">
+                        <audio src="testing-strategies-podcast.mp3">
+                            <source src="testing-strategies-podcast.mp3" type="audio/mpeg">
+                            Your browser does not support the audio tag.
+                        </audio>
+                        <div class="audio-info">
+                            <h3>Testing Strategies Podcast</h3>
                             <div class="progress-container">
                                 <div class="progress-bar">
                                     <div class="progress"></div>
