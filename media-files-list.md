@@ -1,27 +1,43 @@
-# Required Media Files for Full Stack Web Development Media Player
+# MongoDB, React & Express Learning Hub
 
-## Video Files (MP4 format)
-1. `html-css-basics.mp4` - HTML & CSS Fundamentals tutorial
-2. `javascript-essentials.mp4` - JavaScript Essentials course
-3. `react-tutorial.mp4` - React Development tutorial  
-4. `nodejs-backend.mp4` - Node.js Backend development
-5. `database-mongodb.mp4` - MongoDB Database tutorial
-6. `fullstack-deployment.mp4` - Full Stack Deployment guide
-7. `express-server-setup.mp4` - Express.js Server Setup
-8. `git-version-control.mp4` - Git Version Control tutorial
+## 📺 Video Content (YouTube)
+1. **MongoDB Tutorial - CodeWithHarry** - `https://www.youtube.com/watch?v=oSIv-E60NiU`
+   - Complete MongoDB tutorial in Hindi by Harry
+   - Perfect for beginners learning NoSQL databases
+   - Covers installation, CRUD operations, and advanced concepts
 
-## Audio Files (MP3 format)
-1. `web-dev-podcast-intro.mp3` - Web Development Podcast Introduction
-2. `javascript-tips-audio.mp3` - JavaScript Pro Tips audio guide
-3. `react-state-management.mp3` - React State Management audio course
-4. `api-development-guide.mp3` - API Development Guide podcast
-5. `database-design-principles.mp3` - Database Design Principles audio
-6. `devops-deployment-tips.mp3` - DevOps & Deployment Tips podcast
-7. `css-grid-flexbox-guide.mp3` - CSS Grid & Flexbox Guide
-8. `testing-strategies-podcast.mp3` - Testing Strategies Podcast
+2. **React.js Full Course** - `https://www.youtube.com/watch?v=Ke90Tje7VS0`
+   - Complete React tutorial for beginners and advanced developers
+   - Modern React patterns and hooks
 
-## Instructions
-Place these media files in the same directory as the HTML file for the media player to work correctly.
+3. **Express.js Crash Course** - `https://www.youtube.com/watch?v=L72fhGm1tfE`
+   - Build web applications and APIs with Express.js
+   - Server-side JavaScript development
 
-## Note
-These are placeholder filenames. You can replace them with your actual media files or create sample files for testing.
+## 🎧 Audio Content (YouTube)
+1. **MongoDB Podcast Series** - `https://www.youtube.com/watch?v=J6mDkcqU_ZE`
+   - Deep dive into NoSQL database concepts and MongoDB best practices
+
+2. **React Developer Podcast** - `https://www.youtube.com/watch?v=j942wKiXFu8`
+   - React hooks, state management, and modern React patterns
+
+3. **Express.js Mastery Podcast** - `https://www.youtube.com/watch?v=fgTGADljAeg`
+   - Building scalable APIs and web applications with Express.js
+
+## 🎯 Features
+- **YouTube Integration**: All content embedded and linked to YouTube
+- **Responsive Design**: Works on desktop, tablet, and mobile
+- **Keyboard Shortcuts**: Quick navigation with V (videos), A (audio), H (help)
+- **MERN Stack Focus**: Specifically curated for MongoDB, Express, React, Node.js learning
+
+## 🚀 Usage
+- Click individual items to watch/listen on YouTube
+- Use global controls to open multiple items at once
+- Press 'H' for keyboard shortcuts
+- All content opens in new tabs for better multitasking
+
+## 🛠️ Technologies
+- HTML5 with embedded YouTube iframes
+- CSS3 with modern flexbox/grid layouts
+- Vanilla JavaScript for interactivity
+- Font Awesome icons for UI elements

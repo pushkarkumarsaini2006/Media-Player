@@ -1,242 +1,101 @@
-// Interactive Media Player JavaScript
+// YouTube Media Player JavaScript
 
-class MediaPlayer {
+class YouTubeMediaPlayer {
     constructor() {
-        this.videos = document.querySelectorAll('video');
-        this.audios = document.querySelectorAll('audio');
-        this.allMedia = [...this.videos, ...this.audios];
-        this.currentlyPlaying = [];
-        
+        this.videoLinks = [];
+        this.audioLinks = [];
         this.init();
     }
 
     init() {
+        this.collectMediaLinks();
         this.setupGlobalControls();
-        this.setupIndividualControls();
-        this.setupAudioPlayers();
-        this.addAnimations();
+        this.setupAnimations();
         this.setupKeyboardControls();
+        this.handleResponsive();
+    }
+
+    collectMediaLinks() {
+        // Collect all YouTube video links
+        const videoLinks = document.querySelectorAll('.youtube-btn');
+        videoLinks.forEach(link => {
+            this.videoLinks.push(link.href);
+        });
+
+        // Collect all YouTube audio links
+        const audioLinks = document.querySelectorAll('.youtube-audio-btn');
+        audioLinks.forEach(link => {
+            this.audioLinks.push(link.href);
+        });
     }
 
     // Global Controls
     setupGlobalControls() {
-        const playAllVideos = document.getElementById('playAllVideos');
-        const playAllAudios = document.getElementById('playAllAudios');
-        const stopAll = document.getElementById('stopAll');
-        const muteAll = document.getElementById('muteAll');
+        const openAllVideos = document.getElementById('openAllVideos');
+        const openAllAudios = document.getElementById('openAllAudios');
 
-        playAllVideos.addEventListener('click', () => this.playAllMedia(this.videos));
-        playAllAudios.addEventListener('click', () => this.playAllMedia(this.audios));
-        stopAll.addEventListener('click', () => this.stopAllMedia());
-        muteAll.addEventListener('click', () => this.toggleMuteAll());
-    }
-
-    playAllMedia(mediaElements) {
-        this.stopAllMedia(); // Stop any currently playing media first
+        if (openAllVideos) {
+            openAllVideos.addEventListener('click', () => this.openAllMedia(this.videoLinks, 'videos'));
+        }
         
-        mediaElements.forEach((media, index) => {
-            setTimeout(() => {
-                media.currentTime = 0;
-                const playPromise = media.play();
-                
-                if (playPromise !== undefined) {
-                    playPromise.then(() => {
-                        this.currentlyPlaying.push(media);
-                        this.addPlayingEffect(media);
-                    }).catch(error => {
-                        console.log('Auto-play prevented:', error);
-                    });
-                }
-            }, index * 200); // Stagger the start times
-        });
-    }
-
-    stopAllMedia() {
-        this.allMedia.forEach(media => {
-            media.pause();
-            media.currentTime = 0;
-            this.removePlayingEffect(media);
-        });
-        this.currentlyPlaying = [];
-    }
-
-    toggleMuteAll() {
-        const allMuted = this.allMedia.every(media => media.muted);
-        
-        this.allMedia.forEach(media => {
-            media.muted = !allMuted;
-            this.updateMuteButton(media, media.muted);
-        });
-    }
-
-    // Individual Controls
-    setupIndividualControls() {
-        // Video controls
-        this.videos.forEach((video, index) => {
-            const container = video.closest('.media-item');
-            const playBtn = container.querySelector('.play-btn');
-            const pauseBtn = container.querySelector('.pause-btn');
-            const muteBtn = container.querySelector('.mute-btn');
-            const volumeSlider = container.querySelector('.volume-slider');
-
-            this.setupMediaControls(video, playBtn, pauseBtn, muteBtn, volumeSlider);
-        });
-    }
-
-    setupMediaControls(media, playBtn, pauseBtn, muteBtn, volumeSlider) {
-        // Play button
-        playBtn.addEventListener('click', () => {
-            const playPromise = media.play();
-            if (playPromise !== undefined) {
-                playPromise.then(() => {
-                    this.addPlayingEffect(media);
-                    if (!this.currentlyPlaying.includes(media)) {
-                        this.currentlyPlaying.push(media);
-                    }
-                }).catch(error => {
-                    console.log('Play prevented:', error);
-                });
-            }
-        });
-
-        // Pause button
-        pauseBtn.addEventListener('click', () => {
-            media.pause();
-            this.removePlayingEffect(media);
-            this.currentlyPlaying = this.currentlyPlaying.filter(m => m !== media);
-        });
-
-        // Mute button
-        muteBtn.addEventListener('click', () => {
-            media.muted = !media.muted;
-            this.updateMuteButton(media, media.muted);
-        });
-
-        // Volume slider
-        volumeSlider.addEventListener('input', (e) => {
-            media.volume = e.target.value;
-        });
-
-        // Media event listeners
-        media.addEventListener('play', () => {
-            this.addPlayingEffect(media);
-        });
-
-        media.addEventListener('pause', () => {
-            this.removePlayingEffect(media);
-        });
-
-        media.addEventListener('ended', () => {
-            this.removePlayingEffect(media);
-            this.currentlyPlaying = this.currentlyPlaying.filter(m => m !== media);
-        });
-    }
-
-    // Audio Player Setup
-    setupAudioPlayers() {
-        this.audios.forEach((audio, index) => {
-            const container = audio.closest('.audio-item');
-            const playBtn = container.querySelector('.play-btn');
-            const pauseBtn = container.querySelector('.pause-btn');
-            const muteBtn = container.querySelector('.mute-btn');
-            const volumeSlider = container.querySelector('.volume-slider');
-            const progressBar = container.querySelector('.progress-bar');
-            const progress = container.querySelector('.progress');
-            const timeDisplay = container.querySelector('.time-display');
-
-            this.setupMediaControls(audio, playBtn, pauseBtn, muteBtn, volumeSlider);
-            this.setupAudioProgress(audio, progressBar, progress, timeDisplay);
-        });
-    }
-
-    setupAudioProgress(audio, progressBar, progress, timeDisplay) {
-        // Update progress and time
-        audio.addEventListener('timeupdate', () => {
-            if (audio.duration) {
-                const progressPercent = (audio.currentTime / audio.duration) * 100;
-                progress.style.width = progressPercent + '%';
-                
-                const currentTime = this.formatTime(audio.currentTime);
-                const duration = this.formatTime(audio.duration);
-                timeDisplay.textContent = `${currentTime} / ${duration}`;
-            }
-        });
-
-        // Click to seek
-        progressBar.addEventListener('click', (e) => {
-            const rect = progressBar.getBoundingClientRect();
-            const clickX = e.clientX - rect.left;
-            const width = rect.width;
-            const seekTime = (clickX / width) * audio.duration;
-            
-            if (seekTime >= 0 && seekTime <= audio.duration) {
-                audio.currentTime = seekTime;
-            }
-        });
-
-        // Load metadata
-        audio.addEventListener('loadedmetadata', () => {
-            const duration = this.formatTime(audio.duration);
-            timeDisplay.textContent = `0:00 / ${duration}`;
-        });
-    }
-
-    // Utility Methods
-    formatTime(seconds) {
-        if (isNaN(seconds)) return '0:00';
-        
-        const minutes = Math.floor(seconds / 60);
-        const remainingSeconds = Math.floor(seconds % 60);
-        return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
-    }
-
-    addPlayingEffect(media) {
-        const container = media.closest('.media-item, .audio-item');
-        if (container) {
-            container.classList.add('playing');
+        if (openAllAudios) {
+            openAllAudios.addEventListener('click', () => this.openAllMedia(this.audioLinks, 'audio'));
         }
     }
 
-    removePlayingEffect(media) {
-        const container = media.closest('.media-item, .audio-item');
-        if (container) {
-            container.classList.remove('playing');
+    openAllMedia(mediaLinks, type) {
+        if (mediaLinks.length === 0) {
+            alert(`No ${type} links found!`);
+            return;
+        }
+
+        // Ask user for confirmation before opening multiple tabs
+        const confirmed = confirm(`This will open ${mediaLinks.length} new tabs for ${type}. Continue?`);
+        if (confirmed) {
+            mediaLinks.forEach((link, index) => {
+                setTimeout(() => {
+                    window.open(link, '_blank');
+                }, index * 500); // Stagger the opening to avoid browser blocking
+            });
         }
     }
 
-    updateMuteButton(media, isMuted) {
-        const container = media.closest('.media-item, .audio-item');
-        const muteBtn = container.querySelector('.mute-btn');
-        const icon = muteBtn.querySelector('i');
-        
-        if (isMuted) {
-            icon.className = 'fas fa-volume-mute';
-            container.classList.add('muted');
-        } else {
-            icon.className = 'fas fa-volume-up';
-            container.classList.remove('muted');
-        }
-    }
-
-    // Animations
-    addAnimations() {
-        // Fade in elements on load
+    // Animation and Visual Effects
+    setupAnimations() {
+        // Add staggered animation to media items
         const mediaItems = document.querySelectorAll('.media-item, .audio-item');
+        
         mediaItems.forEach((item, index) => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(20px)';
+            
             setTimeout(() => {
-                item.classList.add('fade-in');
+                item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                item.style.opacity = '1';
+                item.style.transform = 'translateY(0)';
             }, index * 100);
         });
 
-        // Add hover effects
-        const controlBtns = document.querySelectorAll('.control-btn');
-        controlBtns.forEach(btn => {
-            btn.addEventListener('mouseenter', () => {
-                btn.classList.add('pulse');
+        // Add hover effects to media items
+        mediaItems.forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                item.style.transform = 'translateY(-5px) scale(1.02)';
             });
             
-            btn.addEventListener('mouseleave', () => {
-                btn.classList.remove('pulse');
+            item.addEventListener('mouseleave', () => {
+                item.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Add click effects to buttons
+        const allButtons = document.querySelectorAll('.control-btn, .youtube-btn, .youtube-audio-btn');
+        
+        allButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                button.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    button.style.transform = 'scale(1)';
+                }, 150);
             });
         });
     }
@@ -244,183 +103,122 @@ class MediaPlayer {
     // Keyboard Controls
     setupKeyboardControls() {
         document.addEventListener('keydown', (e) => {
-            switch(e.key.toLowerCase()) {
-                case ' ': // Spacebar
-                    e.preventDefault();
-                    this.togglePlayPause();
-                    break;
-                case 's': // S key
-                    e.preventDefault();
-                    this.stopAllMedia();
-                    break;
-                case 'm': // M key
-                    e.preventDefault();
-                    this.toggleMuteAll();
-                    break;
-                case 'v': // V key
-                    e.preventDefault();
-                    this.playAllMedia(this.videos);
-                    break;
-                case 'a': // A key
-                    e.preventDefault();
-                    this.playAllMedia(this.audios);
-                    break;
+            // Only trigger if not typing in an input field
+            if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+                switch(e.key.toLowerCase()) {
+                    case 'v':
+                        e.preventDefault();
+                        document.getElementById('openAllVideos')?.click();
+                        break;
+                    case 'a':
+                        e.preventDefault();
+                        document.getElementById('openAllAudios')?.click();
+                        break;
+                    case 'h':
+                        e.preventDefault();
+                        this.showKeyboardShortcuts();
+                        break;
+                    case 'escape':
+                        e.preventDefault();
+                        this.showWelcomeMessage();
+                        break;
+                }
             }
         });
     }
 
-    togglePlayPause() {
-        if (this.currentlyPlaying.length > 0) {
-            this.currentlyPlaying.forEach(media => {
-                media.pause();
-            });
-        } else {
-            // Play the first video if nothing is playing
-            if (this.videos.length > 0) {
-                this.videos[0].play();
-            }
-        }
-    }
-}
+    showKeyboardShortcuts() {
+        const shortcuts = `
+🎹 Keyboard Shortcuts:
+• V - Open all videos
+• A - Open all audio content  
+• H - Show this help
+• ESC - Show welcome message
 
-// Playlist functionality
-class Playlist {
-    constructor() {
-        this.currentIndex = 0;
-        this.isShuffled = false;
-        this.isRepeating = false;
-        this.setupPlaylistControls();
-    }
+📺 YouTube Integration:
+• Click individual items to open on YouTube
+• Use global controls to open multiple items
+• All content opens in new tabs for better experience
 
-    setupPlaylistControls() {
-        // Add playlist controls to audio section
-        const audioSection = document.querySelector('.audio-grid').parentElement;
-        const playlistControls = document.createElement('div');
-        playlistControls.className = 'playlist-controls';
-        playlistControls.innerHTML = `
-            <button class="control-btn" id="shuffleBtn"><i class="fas fa-random"></i> Shuffle</button>
-            <button class="control-btn" id="repeatBtn"><i class="fas fa-redo"></i> Repeat</button>
-            <button class="control-btn" id="nextBtn"><i class="fas fa-forward"></i> Next</button>
-            <button class="control-btn" id="prevBtn"><i class="fas fa-backward"></i> Previous</button>
+🎯 Topics Covered:
+• MongoDB - NoSQL Database
+• React.js - Frontend Framework  
+• Express.js - Backend Framework
         `;
         
-        audioSection.insertBefore(playlistControls, audioSection.querySelector('.audio-grid'));
-
-        // Add event listeners
-        document.getElementById('shuffleBtn').addEventListener('click', () => this.toggleShuffle());
-        document.getElementById('repeatBtn').addEventListener('click', () => this.toggleRepeat());
-        document.getElementById('nextBtn').addEventListener('click', () => this.playNext());
-        document.getElementById('prevBtn').addEventListener('click', () => this.playPrevious());
+        alert(shortcuts);
     }
 
-    toggleShuffle() {
-        this.isShuffled = !this.isShuffled;
-        const btn = document.getElementById('shuffleBtn');
-        btn.style.background = this.isShuffled ? 
-            'linear-gradient(45deg, #4ecdc4, #45b7b8)' : 
-            'linear-gradient(45deg, #ff6b6b, #ee5a24)';
+    showWelcomeMessage() {
+        const message = `
+🎬 Welcome to the Full Stack Web Development Media Player!
+
+This curated collection includes:
+📚 MongoDB Tutorial Videos
+⚛️ React.js Learning Content
+🚀 Express.js Development Guides
+
+All content is hosted on YouTube for the best learning experience.
+Press 'H' for keyboard shortcuts or explore the content below!
+        `;
+        
+        alert(message);
     }
 
-    toggleRepeat() {
-        this.isRepeating = !this.isRepeating;
-        const btn = document.getElementById('repeatBtn');
-        btn.style.background = this.isRepeating ? 
-            'linear-gradient(45deg, #4ecdc4, #45b7b8)' : 
-            'linear-gradient(45deg, #ff6b6b, #ee5a24)';
+    // Utility method for responsive behavior
+    handleResponsive() {
+        const mediaGrid = document.querySelector('.media-grid');
+        const audioGrid = document.querySelector('.audio-grid');
+        
+        const updateLayout = () => {
+            const width = window.innerWidth;
+            if (width < 768) {
+                // Mobile layout adjustments
+                if (mediaGrid) mediaGrid.style.gridTemplateColumns = '1fr';
+                if (audioGrid) audioGrid.style.gridTemplateColumns = '1fr';
+            } else if (width < 1024) {
+                // Tablet layout
+                if (mediaGrid) mediaGrid.style.gridTemplateColumns = 'repeat(2, 1fr)';
+                if (audioGrid) audioGrid.style.gridTemplateColumns = '1fr';
+            } else {
+                // Desktop layout
+                if (mediaGrid) mediaGrid.style.gridTemplateColumns = 'repeat(auto-fit, minmax(300px, 1fr))';
+                if (audioGrid) audioGrid.style.gridTemplateColumns = '1fr';
+            }
+        };
+
+        updateLayout();
+        window.addEventListener('resize', updateLayout);
     }
 
-    playNext() {
-        const audios = document.querySelectorAll('audio');
-        if (audios.length === 0) return;
-
-        // Stop current audio
-        audios[this.currentIndex].pause();
-        audios[this.currentIndex].currentTime = 0;
-
-        // Calculate next index
-        if (this.isShuffled) {
-            this.currentIndex = Math.floor(Math.random() * audios.length);
-        } else {
-            this.currentIndex = (this.currentIndex + 1) % audios.length;
-        }
-
-        // Play next audio
-        audios[this.currentIndex].play();
-    }
-
-    playPrevious() {
-        const audios = document.querySelectorAll('audio');
-        if (audios.length === 0) return;
-
-        // Stop current audio
-        audios[this.currentIndex].pause();
-        audios[this.currentIndex].currentTime = 0;
-
-        // Calculate previous index
-        this.currentIndex = this.currentIndex === 0 ? 
-            audios.length - 1 : this.currentIndex - 1;
-
-        // Play previous audio
-        audios[this.currentIndex].play();
+    // Performance tracking
+    trackPerformance() {
+        console.log(`📊 Media Player Stats:
+        Videos: ${this.videoLinks.length}
+        Audio: ${this.audioLinks.length}
+        Total Items: ${this.videoLinks.length + this.audioLinks.length}`);
     }
 }
 
-// Volume Visualizer (simplified)
-class VolumeVisualizer {
-    constructor() {
-        this.setupVisualizer();
-    }
-
-    setupVisualizer() {
-        // Add visual feedback when volume changes
-        const volumeSliders = document.querySelectorAll('.volume-slider');
-        volumeSliders.forEach(slider => {
-            slider.addEventListener('input', (e) => {
-                const value = e.target.value;
-                const container = slider.closest('.media-item, .audio-item');
-                
-                // Visual feedback based on volume level
-                if (value > 0.7) {
-                    container.style.borderColor = '#ff6b6b';
-                } else if (value > 0.3) {
-                    container.style.borderColor = '#feca57';
-                } else {
-                    container.style.borderColor = '#48dbfb';
-                }
-            });
-        });
-    }
-}
-
-// Initialize everything when DOM is loaded
+// Initialize the YouTube Media Player when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    const mediaPlayer = new MediaPlayer();
-    const playlist = new Playlist();
-    const visualizer = new VolumeVisualizer();
-
-    // Add loading animation
-    document.body.style.opacity = '0';
+    const player = new YouTubeMediaPlayer();
+    
+    // Show welcome message after a short delay
     setTimeout(() => {
-        document.body.style.transition = 'opacity 0.5s ease';
-        document.body.style.opacity = '1';
-    }, 100);
-
-    // Add some helpful tooltips
-    const addTooltip = (element, text) => {
-        element.title = text;
-    };
-
-    // Add tooltips to buttons
-    addTooltip(document.getElementById('playAllVideos'), 'Play all videos (V key)');
-    addTooltip(document.getElementById('playAllAudios'), 'Play all audios (A key)');
-    addTooltip(document.getElementById('stopAll'), 'Stop all media (S key)');
-    addTooltip(document.getElementById('muteAll'), 'Toggle mute all (M key)');
-
-    console.log('🎵 Interactive Media Player Loaded Successfully! 🎵');
-    console.log('Keyboard shortcuts:');
-    console.log('- Spacebar: Play/Pause');
-    console.log('- V: Play all videos');
-    console.log('- A: Play all audios');
-    console.log('- S: Stop all');
-    console.log('- M: Mute/Unmute all');
+        player.showWelcomeMessage();
+    }, 1000);
+    
+    // Track performance
+    player.trackPerformance();
+    
+    // Add success message to console
+    console.log('🎬 YouTube Media Player loaded successfully!');
+    console.log('📚 Ready to explore MongoDB, React, and Express content!');
+    console.log('Press H for keyboard shortcuts');
 });
+
+// Export for potential module use
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = YouTubeMediaPlayer;
+}

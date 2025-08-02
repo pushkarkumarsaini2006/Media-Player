@@ -373,3 +373,117 @@ header p {
 ::-webkit-scrollbar-thumb:hover {
     background: rgba(255, 255, 255, 0.5);
 }
+
+/* YouTube Integration Styles */
+.youtube-container {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-bottom: 15px;
+}
+
+.youtube-container iframe {
+    width: 100%;
+    height: 200px;
+    border: none;
+}
+
+.youtube-btn {
+    background: linear-gradient(45deg, #ff0000, #cc0000);
+    color: white;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.youtube-btn:hover {
+    background: linear-gradient(45deg, #cc0000, #990000);
+    transform: translateY(-2px);
+    text-decoration: none;
+    color: white;
+}
+
+.youtube-audio-btn {
+    background: linear-gradient(45deg, #ff0000, #cc0000);
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.youtube-audio-btn:hover {
+    background: linear-gradient(45deg, #cc0000, #990000);
+    transform: translateY(-2px);
+    text-decoration: none;
+    color: white;
+}
+
+.video-description,
+.audio-description {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 5px 0 10px 0;
+    line-height: 1.4;
+}
+
+.audio-thumbnail {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+.audio-thumbnail i {
+    font-size: 2rem;
+    color: white;
+}
+
+.audio-player {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.audio-info {
+    flex: 1;
+}
+
+.audio-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+/* Media responsiveness for YouTube content */
+@media (max-width: 768px) {
+    .youtube-container iframe {
+        height: 180px;
+    }
+    
+    .audio-player {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .audio-thumbnail {
+        margin: 0 auto 15px auto;
+    }
+}
