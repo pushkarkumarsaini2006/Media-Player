@@ -119,15 +119,21 @@ class LuminexPlayer {
                 e.preventDefault();
                 const target = item.dataset.section;
                 
-                // Update active nav
-                navItems.forEach(nav => nav.classList.remove('active'));
+                // Update active nav and aria-current
+                navItems.forEach(nav => {
+                    nav.classList.remove('active');
+                    nav.removeAttribute('aria-current');
+                });
                 item.classList.add('active');
+                item.setAttribute('aria-current', 'page');
                 
-                // Show target section
+                // Show target section and manage hidden attribute for accessibility
                 sections.forEach(section => {
                     section.classList.remove('active');
+                    section.setAttribute('hidden', '');
                     if (section.id === `${target}-section`) {
                         section.classList.add('active');
+                        section.removeAttribute('hidden');
                     }
                 });
                 
@@ -136,7 +142,21 @@ class LuminexPlayer {
                 activeSection.style.animation = 'none';
                 activeSection.offsetHeight; // Trigger reflow
                 activeSection.style.animation = 'fadeIn 0.5s ease';
+                
+                // Move focus to the section heading for screen reader users
+                const heading = activeSection.querySelector('h2');
+                if (heading) {
+                    heading.setAttribute('tabindex', '-1');
+                    heading.focus();
+                }
             });
+        });
+        
+        // Initialize: ensure only the active section is visible to assistive tech
+        sections.forEach(section => {
+            if (!section.classList.contains('active')) {
+                section.setAttribute('hidden', '');
+            }
         });
     }
     
@@ -166,14 +186,20 @@ class LuminexPlayer {
             if (this.mainVideo.paused) {
                 this.mainVideo.play();
                 this.isVideoPlaying = true;
-                playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
-                bigPlayBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                playPauseBtn.innerHTML = '<i class="fas fa-pause" aria-hidden="true"></i>';
+                playPauseBtn.setAttribute('aria-label', 'Pause');
+                playPauseBtn.setAttribute('aria-pressed', 'true');
+                bigPlayBtn.innerHTML = '<i class="fas fa-pause" aria-hidden="true"></i>';
+                bigPlayBtn.setAttribute('aria-label', 'Pause video');
                 this.videoWrapper.classList.add('playing');
             } else {
                 this.mainVideo.pause();
                 this.isVideoPlaying = false;
-                playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
-                bigPlayBtn.innerHTML = '<i class="fas fa-play"></i>';
+                playPauseBtn.innerHTML = '<i class="fas fa-play" aria-hidden="true"></i>';
+                playPauseBtn.setAttribute('aria-label', 'Play');
+                playPauseBtn.setAttribute('aria-pressed', 'false');
+                bigPlayBtn.innerHTML = '<i class="fas fa-play" aria-hidden="true"></i>';
+                bigPlayBtn.setAttribute('aria-label', 'Play video');
                 this.videoWrapper.classList.remove('playing');
             }
         };
@@ -190,15 +216,18 @@ class LuminexPlayer {
         muteBtn?.addEventListener('click', () => {
             this.mainVideo.muted = !this.mainVideo.muted;
             muteBtn.innerHTML = this.mainVideo.muted ? 
-                '<i class="fas fa-volume-mute"></i>' : 
-                '<i class="fas fa-volume-up"></i>';
+                '<i class="fas fa-volume-mute" aria-hidden="true"></i>' : 
+                '<i class="fas fa-volume-up" aria-hidden="true"></i>';
+            muteBtn.setAttribute('aria-label', this.mainVideo.muted ? 'Unmute' : 'Mute');
+            muteBtn.setAttribute('aria-pressed', this.mainVideo.muted ? 'true' : 'false');
         });
         
         volumeSlider?.addEventListener('input', (e) => {
             this.mainVideo.volume = e.target.value / 100;
             muteBtn.innerHTML = e.target.value == 0 ? 
-                '<i class="fas fa-volume-mute"></i>' : 
-                '<i class="fas fa-volume-up"></i>';
+                '<i class="fas fa-volume-mute" aria-hidden="true"></i>' : 
+                '<i class="fas fa-volume-up" aria-hidden="true"></i>';
+            muteBtn.setAttribute('aria-label', e.target.value == 0 ? 'Unmute' : 'Mute');
         });
         
         // Progress bar
@@ -209,6 +238,8 @@ class LuminexPlayer {
             if (progressFilled) progressFilled.style.width = `${progress}%`;
             if (progressThumb) progressThumb.style.left = `${progress}%`;
             if (currentTimeEl) currentTimeEl.textContent = this.formatTime(this.mainVideo.currentTime);
+            // Update ARIA value for screen readers
+            if (progressBar) progressBar.setAttribute('aria-valuenow', Math.round(progress));
         });
         
         this.mainVideo?.addEventListener('loadedmetadata', () => {
@@ -225,10 +256,12 @@ class LuminexPlayer {
         fullscreenBtn?.addEventListener('click', () => {
             if (!document.fullscreenElement) {
                 this.videoWrapper.requestFullscreen();
-                fullscreenBtn.innerHTML = '<i class="fas fa-compress"></i>';
+                fullscreenBtn.innerHTML = '<i class="fas fa-compress" aria-hidden="true"></i>';
+                fullscreenBtn.setAttribute('aria-label', 'Exit fullscreen');
             } else {
                 document.exitFullscreen();
-                fullscreenBtn.innerHTML = '<i class="fas fa-expand"></i>';
+                fullscreenBtn.innerHTML = '<i class="fas fa-expand" aria-hidden="true"></i>';
+                fullscreenBtn.setAttribute('aria-label', 'Enter fullscreen');
             }
         });
         
@@ -323,6 +356,7 @@ class LuminexPlayer {
         shuffleBtn?.addEventListener('click', () => {
             this.isShuffleOn = !this.isShuffleOn;
             shuffleBtn.classList.toggle('active', this.isShuffleOn);
+            shuffleBtn.setAttribute('aria-pressed', this.isShuffleOn ? 'true' : 'false');
             this.showToast(this.isShuffleOn ? 'Shuffle on' : 'Shuffle off');
         });
         
@@ -330,6 +364,7 @@ class LuminexPlayer {
         repeatBtn?.addEventListener('click', () => {
             this.isRepeatOn = !this.isRepeatOn;
             repeatBtn.classList.toggle('active', this.isRepeatOn);
+            repeatBtn.setAttribute('aria-pressed', this.isRepeatOn ? 'true' : 'false');
             this.audioPlayer.loop = this.isRepeatOn;
             this.showToast(this.isRepeatOn ? 'Repeat on' : 'Repeat off');
         });
@@ -349,6 +384,11 @@ class LuminexPlayer {
             // Update mini player
             const miniProgress = document.querySelector('.mini-progress-filled');
             if (miniProgress) miniProgress.style.width = `${progress}%`;
+            
+            // Update ARIA values for screen readers
+            if (progressBar) progressBar.setAttribute('aria-valuenow', Math.round(progress));
+            const miniProgressBar = document.querySelector('.mini-progress');
+            if (miniProgressBar) miniProgressBar.setAttribute('aria-valuenow', Math.round(progress));
         });
         
         this.audioPlayer?.addEventListener('loadedmetadata', () => {
@@ -381,8 +421,12 @@ class LuminexPlayer {
             if (playPromise !== undefined) {
                 playPromise.then(() => {
                     this.isAudioPlaying = true;
-                    playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
-                    miniPlayBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                    playPauseBtn.innerHTML = '<i class="fas fa-pause" aria-hidden="true"></i>';
+                    playPauseBtn.setAttribute('aria-label', 'Pause');
+                    playPauseBtn.setAttribute('aria-pressed', 'true');
+                    miniPlayBtn.innerHTML = '<i class="fas fa-pause" aria-hidden="true"></i>';
+                    miniPlayBtn.setAttribute('aria-label', 'Pause');
+                    miniPlayBtn.setAttribute('aria-pressed', 'true');
                     this.startVisualizer();
                 }).catch(error => {
                     console.error('Audio play failed:', error);
@@ -392,8 +436,12 @@ class LuminexPlayer {
         } else {
             this.audioPlayer.pause();
             this.isAudioPlaying = false;
-            playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
-            miniPlayBtn.innerHTML = '<i class="fas fa-play"></i>';
+            playPauseBtn.innerHTML = '<i class="fas fa-play" aria-hidden="true"></i>';
+            playPauseBtn.setAttribute('aria-label', 'Play');
+            playPauseBtn.setAttribute('aria-pressed', 'false');
+            miniPlayBtn.innerHTML = '<i class="fas fa-play" aria-hidden="true"></i>';
+            miniPlayBtn.setAttribute('aria-label', 'Play');
+            miniPlayBtn.setAttribute('aria-pressed', 'false');
         }
     }
     
@@ -526,18 +574,36 @@ class LuminexPlayer {
         cards.forEach((card, index) => {
             // Play button
             const playBtn = card.querySelector('.play-btn');
-            playBtn?.addEventListener('click', (e) => {
-                e.stopPropagation();
+            const playVideo = (e) => {
+                if (e) e.stopPropagation();
                 this.currentVideoIndex = index;
                 this.changeVideo(0);
                 this.mainVideo.play();
-                document.getElementById('playPauseBtn').innerHTML = '<i class="fas fa-pause"></i>';
-                document.getElementById('bigPlayBtn').innerHTML = '<i class="fas fa-pause"></i>';
+                const playPauseBtn = document.getElementById('playPauseBtn');
+                const bigPlayBtn = document.getElementById('bigPlayBtn');
+                playPauseBtn.innerHTML = '<i class="fas fa-pause" aria-hidden="true"></i>';
+                playPauseBtn.setAttribute('aria-label', 'Pause');
+                playPauseBtn.setAttribute('aria-pressed', 'true');
+                bigPlayBtn.innerHTML = '<i class="fas fa-pause" aria-hidden="true"></i>';
+                bigPlayBtn.setAttribute('aria-label', 'Pause video');
                 this.videoWrapper.classList.add('playing');
                 this.isVideoPlaying = true;
                 
-                // Scroll to player
-                document.querySelector('.featured-player').scrollIntoView({ behavior: 'smooth' });
+                // Scroll to player and focus
+                const player = document.querySelector('.featured-player');
+                player.scrollIntoView({ behavior: 'smooth' });
+                // Announce to screen readers
+                this.announceToScreenReader(`Now playing: ${this.videos[index].title}`);
+            };
+            
+            playBtn?.addEventListener('click', playVideo);
+            
+            // Keyboard support for media cards
+            card.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    playVideo();
+                }
             });
             
             // Favorite button
@@ -554,14 +620,42 @@ class LuminexPlayer {
         const trackItems = document.querySelectorAll('.track-item');
         
         trackItems.forEach((item, index) => {
-            item.addEventListener('click', () => {
+            const playTrack = () => {
                 this.currentTrackIndex = index;
                 this.loadTrack(index);
                 this.audioPlayer.play();
                 this.isAudioPlaying = true;
-                document.getElementById('audioPlayPauseBtn').innerHTML = '<i class="fas fa-pause"></i>';
-                document.getElementById('miniPlayBtn').innerHTML = '<i class="fas fa-pause"></i>';
+                const playPauseBtn = document.getElementById('audioPlayPauseBtn');
+                const miniPlayBtn = document.getElementById('miniPlayBtn');
+                playPauseBtn.innerHTML = '<i class="fas fa-pause" aria-hidden="true"></i>';
+                playPauseBtn.setAttribute('aria-label', 'Pause');
+                playPauseBtn.setAttribute('aria-pressed', 'true');
+                miniPlayBtn.innerHTML = '<i class="fas fa-pause" aria-hidden="true"></i>';
+                miniPlayBtn.setAttribute('aria-label', 'Pause');
+                miniPlayBtn.setAttribute('aria-pressed', 'true');
                 this.startVisualizer();
+                
+                // Update aria-current for track items
+                trackItems.forEach((t, i) => {
+                    if (i === index) {
+                        t.setAttribute('aria-current', 'true');
+                    } else {
+                        t.removeAttribute('aria-current');
+                    }
+                });
+                
+                // Announce to screen readers
+                this.announceToScreenReader(`Now playing: ${this.tracks[index].title} by ${this.tracks[index].artist}`);
+            };
+            
+            item.addEventListener('click', playTrack);
+            
+            // Keyboard support for track items
+            item.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    playTrack();
+                }
             });
         });
     }
@@ -1495,6 +1589,25 @@ class LuminexPlayer {
                 toast.classList.remove('show');
             }, 3000);
         }
+    }
+    
+    // Announce messages to screen readers via live region
+    announceToScreenReader(message) {
+        let announcer = document.getElementById('sr-announcer');
+        if (!announcer) {
+            announcer = document.createElement('div');
+            announcer.id = 'sr-announcer';
+            announcer.setAttribute('role', 'status');
+            announcer.setAttribute('aria-live', 'polite');
+            announcer.setAttribute('aria-atomic', 'true');
+            announcer.className = 'visually-hidden';
+            document.body.appendChild(announcer);
+        }
+        // Clear and set message to trigger announcement
+        announcer.textContent = '';
+        setTimeout(() => {
+            announcer.textContent = message;
+        }, 100);
     }
     
     animateOnLoad() {

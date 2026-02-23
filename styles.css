@@ -1,4 +1,82 @@
 /* ===== Modern Media Player CSS ===== */
+
+/* Font Awesome font-display override for better LCP */
+@font-face {
+    font-family: 'Font Awesome 6 Free';
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Font Awesome 6 Brands';
+    font-display: swap;
+}
+
+/* ===== Accessibility Styles ===== */
+
+/* Skip Link for keyboard navigation */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--primary);
+    color: white;
+    padding: 8px 16px;
+    z-index: 10000;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 0 0 8px 0;
+    transition: top 0.3s ease;
+}
+
+.skip-link:focus {
+    top: 0;
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+/* Visually hidden but accessible to screen readers */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Focus styles for all interactive elements */
+:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+[tabindex]:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+/* Custom focus indicator for video progress bar */
+.progress-bar:focus-visible,
+.audio-progress-bar:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+    border-radius: 4px;
+}
+
+/* High contrast focus for media cards */
+.media-card:focus-visible,
+.track-item:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 6px rgba(34, 211, 238, 0.2);
+}
+
 /* Reset and Variables */
 :root {
     --primary: #6366f1;
