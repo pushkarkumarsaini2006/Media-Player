@@ -3,159 +3,337 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MongoDB, React & Express Learning Hub</title>
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <title>Luminex Media Player</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>">
     <link rel="stylesheet" href="styles.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1><i class="fas fa-play-circle"></i> MongoDB, React & Express Learning Hub</h1>
-            <p>Master the MERN stack with curated YouTube content</p>
-        </header>
-
-        <!-- Media Controls -->
-        <div class="media-controls">
-            <button class="control-btn" id="openAllVideos"><i class="fab fa-youtube"></i> Open All Videos</button>
-            <button class="control-btn" id="openAllAudios"><i class="fas fa-music"></i> Open All Audio</button>
-            <a href="https://www.youtube.com/playlist?list=PLillGF-RfqbYeckUaD1z6nviTp31GLTH8" target="_blank" class="control-btn" style="text-decoration: none; color: white;">
-                <i class="fas fa-list"></i> Full Playlist
-            </a>
-        </div>
-
-        <!-- Video Section -->
-        <section class="media-section">
-            <h2><i class="fas fa-video"></i> Video Collection</h2>
-            <div class="media-grid" id="videoGrid">
-                <div class="media-item">
-                    <div class="youtube-container">
-                        <iframe width="300" height="200" src="https://www.youtube.com/embed/oSIv-E60NiU" 
-                                title="MongoDB Tutorial in Hindi by CodeWithHarry" frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                allowfullscreen></iframe>
-                    </div>
-                    <div class="media-info">
-                        <h3>MongoDB Tutorial - CodeWithHarry</h3>
-                        <p class="video-description">Complete MongoDB tutorial in Hindi by Harry</p>
-                        <div class="media-controls-individual">
-                            <a href="https://www.youtube.com/watch?v=oSIv-E60NiU" target="_blank" class="mini-btn youtube-btn">
-                                <i class="fab fa-youtube"></i> Watch on YouTube
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="media-item">
-                    <div class="youtube-container">
-                        <iframe width="300" height="200" src="https://www.youtube.com/embed/Ke90Tje7VS0" 
-                                title="React Tutorial for Beginners" frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                allowfullscreen></iframe>
-                    </div>
-                    <div class="media-info">
-                        <h3>React.js Full Course</h3>
-                        <p class="video-description">Complete React tutorial for beginners and advanced developers</p>
-                        <div class="media-controls-individual">
-                            <a href="https://www.youtube.com/watch?v=Ke90Tje7VS0" target="_blank" class="mini-btn youtube-btn">
-                                <i class="fab fa-youtube"></i> Watch on YouTube
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="media-item">
-                    <div class="youtube-container">
-                        <iframe width="300" height="200" src="https://www.youtube.com/embed/L72fhGm1tfE" 
-                                title="Express.js Tutorial" frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                allowfullscreen></iframe>
-                    </div>
-                    <div class="media-info">
-                        <h3>Express.js Crash Course</h3>
-                        <p class="video-description">Build web applications and APIs with Express.js</p>
-                        <div class="media-controls-individual">
-                            <a href="https://www.youtube.com/watch?v=L72fhGm1tfE" target="_blank" class="mini-btn youtube-btn">
-                                <i class="fab fa-youtube"></i> Watch on YouTube
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Audio Section -->
-        <section class="media-section">
-            <h2><i class="fas fa-music"></i> Audio Collection</h2>
-            <div class="audio-grid" id="audioGrid">
-                <div class="audio-item">
-                    <div class="audio-player">
-                        <div class="audio-thumbnail">
-                            <i class="fas fa-database"></i>
-                        </div>
-                        <div class="audio-info">
-                            <h3>MongoDB Podcast Series</h3>
-                            <p class="audio-description">Deep dive into NoSQL database concepts and MongoDB best practices</p>
-                            <div class="progress-container">
-                                <div class="progress-bar">
-                                    <div class="progress"></div>
-                                </div>
-                                <span class="time-display">0:00 / 0:00</span>
-                            </div>
-                        </div>
-                        <div class="audio-controls">
-                            <a href="https://www.youtube.com/watch?v=J6mDkcqU_ZE" target="_blank" class="audio-btn youtube-audio-btn">
-                                <i class="fab fa-youtube"></i> Listen on YouTube
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="audio-item">
-                    <div class="audio-player">
-                        <div class="audio-thumbnail">
-                            <i class="fab fa-react"></i>
-                        </div>
-                        <div class="audio-info">
-                            <h3>React Developer Podcast</h3>
-                            <p class="audio-description">React hooks, state management, and modern React patterns</p>
-                            <div class="progress-container">
-                                <div class="progress-bar">
-                                    <div class="progress"></div>
-                                </div>
-                                <span class="time-display">0:00 / 0:00</span>
-                            </div>
-                        </div>
-                        <div class="audio-controls">
-                            <a href="https://www.youtube.com/watch?v=j942wKiXFu8" target="_blank" class="audio-btn youtube-audio-btn">
-                                <i class="fab fa-youtube"></i> Listen on YouTube
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="audio-item">
-                    <div class="audio-player">
-                        <div class="audio-thumbnail">
-                            <i class="fas fa-server"></i>
-                        </div>
-                        <div class="audio-info">
-                            <h3>Express.js Mastery Podcast</h3>
-                            <p class="audio-description">Building scalable APIs and web applications with Express.js</p>
-                            <div class="progress-container">
-                                <div class="progress-bar">
-                                    <div class="progress"></div>
-                                </div>
-                                <span class="time-display">0:00 / 0:00</span>
-                            </div>
-                        </div>
-                        <div class="audio-controls">
-                            <a href="https://www.youtube.com/watch?v=fgTGADljAeg" target="_blank" class="audio-btn youtube-audio-btn">
-                                <i class="fab fa-youtube"></i> Listen on YouTube
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="bg-gradient"></div>
+        <div class="floating-particles"></div>
     </div>
 
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-compact-disc"></i>
+                </div>
+                <span class="logo-text">Luminex</span>
+            </div>
+            
+            <nav class="nav-menu">
+                <a href="#" class="nav-item active" data-section="videos">
+                    <i class="fas fa-film"></i>
+                    <span>Videos</span>
+                </a>
+                <a href="#" class="nav-item" data-section="music">
+                    <i class="fas fa-headphones"></i>
+                    <span>Music</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="equalizer">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+                <p class="now-playing-label">Now Playing</p>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search media..." id="searchInput">
+                </div>
+                <div class="header-actions">
+                    <button class="icon-btn" id="themeToggle" title="Toggle Theme">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="icon-btn" id="shuffleBtn" title="Shuffle">
+                        <i class="fas fa-random"></i>
+                    </button>
+                    <button class="icon-btn" id="settingsBtn" title="Settings">
+                        <i class="fas fa-cog"></i>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Video Section -->
+            <section class="content-section active" id="videos-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-play-circle"></i> Featured Videos</h2>
+                    <div class="view-toggle">
+                        <button class="view-btn active" data-view="grid"><i class="fas fa-th-large"></i></button>
+                        <button class="view-btn" data-view="list"><i class="fas fa-list"></i></button>
+                    </div>
+                </div>
+
+                <!-- Featured Video Player -->
+                <div class="featured-player" id="mainVideoPlayer">
+                    <div class="video-wrapper">
+                        <video id="mainVideo" poster="https://peach.blender.org/wp-content/uploads/bbb-splash.png">
+                            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-overlay">
+                            <button class="big-play-btn" id="bigPlayBtn">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                        <div class="video-controls">
+                            <div class="progress-container">
+                                <div class="progress-bar" id="videoProgress">
+                                    <div class="progress-filled"></div>
+                                    <div class="progress-thumb"></div>
+                                </div>
+                            </div>
+                            <div class="controls-row">
+                                <div class="controls-left">
+                                    <button class="control-btn" id="playPauseBtn">
+                                        <i class="fas fa-play"></i>
+                                    </button>
+                                    <button class="control-btn" id="prevVideoBtn">
+                                        <i class="fas fa-step-backward"></i>
+                                    </button>
+                                    <button class="control-btn" id="nextVideoBtn">
+                                        <i class="fas fa-step-forward"></i>
+                                    </button>
+                                    <div class="volume-control">
+                                        <button class="control-btn" id="muteBtn">
+                                            <i class="fas fa-volume-up"></i>
+                                        </button>
+                                        <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="80">
+                                    </div>
+                                    <span class="time-display">
+                                        <span id="currentTime">0:00</span> / <span id="duration">0:00</span>
+                                    </span>
+                                </div>
+                                <div class="controls-right">
+                                    <button class="control-btn" id="pipBtn" title="Picture in Picture">
+                                        <i class="fas fa-clone"></i>
+                                    </button>
+                                    <button class="control-btn" id="speedBtn" title="Playback Speed">
+                                        <span class="speed-label">1x</span>
+                                    </button>
+                                    <button class="control-btn" id="fullscreenBtn">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <h3 id="videoTitle">Big Buck Bunny</h3>
+                        <p id="videoDescription">A comedic animated short film featuring a giant rabbit dealing with bullying rodents.</p>
+                        <div class="video-meta">
+                            <span><i class="fas fa-eye"></i> 2.4M views</span>
+                            <span><i class="fas fa-clock"></i> 9:56</span>
+                            <span><i class="fas fa-calendar"></i> 2008</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video Grid -->
+                <div class="media-grid" id="videoGrid">
+                    <div class="media-card" data-src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" data-title="Big Buck Bunny" data-desc="A comedic animated short film featuring a giant rabbit dealing with bullying rodents.">
+                        <div class="card-thumbnail">
+                            <img src="https://peach.blender.org/wp-content/uploads/bbb-splash.png" alt="Big Buck Bunny">
+                            <div class="card-overlay">
+                                <button class="play-btn"><i class="fas fa-play"></i></button>
+                            </div>
+                            <span class="duration-badge">9:56</span>
+                        </div>
+                        <div class="card-info">
+                            <h4>Big Buck Bunny</h4>
+                            <p>Blender Foundation</p>
+                            <div class="card-stats">
+                                <span><i class="fas fa-eye"></i> 2.4M</span>
+                                <span><i class="fas fa-heart"></i> 45K</span>
+                            </div>
+                        </div>
+                        <button class="favorite-btn" title="Add to favorites"><i class="far fa-heart"></i></button>
+                    </div>
+
+                    <div class="media-card" data-src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4" data-title="Sintel" data-desc="An epic animated short about a girl's quest to find her pet dragon in a fantasy world.">
+                        <div class="card-thumbnail">
+                            <img src="https://durian.blender.org/wp-content/uploads/2010/06/05.8b_comp_000272.jpg" alt="Sintel">
+                            <div class="card-overlay">
+                                <button class="play-btn"><i class="fas fa-play"></i></button>
+                            </div>
+                            <span class="duration-badge">14:48</span>
+                        </div>
+                        <div class="card-info">
+                            <h4>Sintel</h4>
+                            <p>Blender Foundation</p>
+                            <div class="card-stats">
+                                <span><i class="fas fa-eye"></i> 1.8M</span>
+                                <span><i class="fas fa-heart"></i> 32K</span>
+                            </div>
+                        </div>
+                        <button class="favorite-btn" title="Add to favorites"><i class="far fa-heart"></i></button>
+                    </div>
+
+                    <div class="media-card" data-src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" data-title="Elephants Dream" data-desc="The world's first open movie, a surreal science fiction story about two characters exploring a machine.">
+                        <div class="card-thumbnail">
+                            <img src="https://i.ytimg.com/vi/TLkA0RELQ1g/maxresdefault.jpg" alt="Elephants Dream">
+                            <div class="card-overlay">
+                                <button class="play-btn"><i class="fas fa-play"></i></button>
+                            </div>
+                            <span class="duration-badge">10:54</span>
+                        </div>
+                        <div class="card-info">
+                            <h4>Elephants Dream</h4>
+                            <p>Blender Foundation</p>
+                            <div class="card-stats">
+                                <span><i class="fas fa-eye"></i> 1.2M</span>
+                                <span><i class="fas fa-heart"></i> 28K</span>
+                            </div>
+                        </div>
+                        <button class="favorite-btn" title="Add to favorites"><i class="far fa-heart"></i></button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Music Section -->
+            <section class="content-section" id="music-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-music"></i> Music Library</h2>
+                </div>
+
+                <!-- Audio Player -->
+                <div class="audio-player-container">
+                    <div class="album-art">
+                        <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=300&h=300&fit=crop" alt="Album Art" id="albumArt">
+                        <div class="vinyl-record"></div>
+                    </div>
+                    <div class="audio-details">
+                        <h3 id="trackTitle">Tristram Theme</h3>
+                        <p id="trackArtist">Blizzard Entertainment</p>
+                        <div class="audio-visualizer">
+                            <canvas id="visualizer"></canvas>
+                        </div>
+                        <div class="audio-progress">
+                            <span id="audioCurrentTime">0:00</span>
+                            <div class="audio-progress-bar" id="audioProgress">
+                                <div class="audio-progress-filled"></div>
+                            </div>
+                            <span id="audioDuration">0:00</span>
+                        </div>
+                        <div class="audio-controls">
+                            <button class="audio-btn" id="shuffleAudioBtn" title="Shuffle">
+                                <i class="fas fa-random"></i>
+                            </button>
+                            <button class="audio-btn" id="prevAudioBtn">
+                                <i class="fas fa-step-backward"></i>
+                            </button>
+                            <button class="audio-btn play-pause-main" id="audioPlayPauseBtn">
+                                <i class="fas fa-play"></i>
+                            </button>
+                            <button class="audio-btn" id="nextAudioBtn">
+                                <i class="fas fa-step-forward"></i>
+                            </button>
+                            <button class="audio-btn" id="repeatAudioBtn" title="Repeat">
+                                <i class="fas fa-redo"></i>
+                            </button>
+                        </div>
+                        <div class="audio-volume">
+                            <i class="fas fa-volume-down"></i>
+                            <input type="range" id="audioVolumeSlider" min="0" max="100" value="80">
+                            <i class="fas fa-volume-up"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Track List -->
+                <div class="track-list" id="trackList">
+                    <div class="track-item active" data-src="https://archive.org/download/IGM-V7/IGM%20-%20Vol.%207/25%20Diablo%20-%20Tristram%20%28Blizzard%29.mp3" data-title="Tristram Theme" data-artist="Blizzard Entertainment" data-cover="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=300&h=300&fit=crop">
+                        <div class="track-number">
+                            <span class="num">1</span>
+                            <i class="fas fa-play playing-icon"></i>
+                        </div>
+                        <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=50&h=50&fit=crop" alt="Track">
+                        <div class="track-info">
+                            <h5>Tristram Theme</h5>
+                            <p>Blizzard Entertainment</p>
+                        </div>
+                        <span class="track-duration">6:26</span>
+                        <button class="track-options"><i class="fas fa-ellipsis-h"></i></button>
+                    </div>
+
+                    <div class="track-item" data-src="https://archive.org/download/testmp3testfile/mpthreetest.mp3" data-title="Test Audio" data-artist="Archive.org" data-cover="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=300&h=300&fit=crop">
+                        <div class="track-number">
+                            <span class="num">2</span>
+                            <i class="fas fa-play playing-icon"></i>
+                        </div>
+                        <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=50&h=50&fit=crop" alt="Track">
+                        <div class="track-info">
+                            <h5>Test Audio</h5>
+                            <p>Archive.org</p>
+                        </div>
+                        <span class="track-duration">0:12</span>
+                        <button class="track-options"><i class="fas fa-ellipsis-h"></i></button>
+                    </div>
+
+                    <div class="track-item" data-src="https://archive.org/download/IGM-V7/IGM%20-%20Vol.%207/01%20Age%20Of%20Empires%20II%20-%20Menu%20%28Microsoft%29.mp3" data-title="Age of Empires II Menu" data-artist="Microsoft" data-cover="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=300&h=300&fit=crop">
+                        <div class="track-number">
+                            <span class="num">3</span>
+                            <i class="fas fa-play playing-icon"></i>
+                        </div>
+                        <img src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=50&h=50&fit=crop" alt="Track">
+                        <div class="track-info">
+                            <h5>Age of Empires II Menu</h5>
+                            <p>Microsoft</p>
+                        </div>
+                        <span class="track-duration">2:44</span>
+                        <button class="track-options"><i class="fas fa-ellipsis-h"></i></button>
+                    </div>
+                </div>
+            </section>
+
+
+        </main>
+    </div>
+
+    <!-- Mini Player (Bottom Bar) -->
+    <div class="mini-player" id="miniPlayer">
+        <div class="mini-progress">
+            <div class="mini-progress-filled"></div>
+        </div>
+        <div class="mini-info">
+            <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=50&h=50&fit=crop" alt="Now Playing" id="miniCover">
+            <div class="mini-text">
+                <span class="mini-title" id="miniTitle">Tristram Theme</span>
+                <span class="mini-artist" id="miniArtist">Blizzard Entertainment</span>
+            </div>
+        </div>
+        <div class="mini-controls">
+            <button class="mini-btn" id="miniPrevBtn"><i class="fas fa-step-backward"></i></button>
+            <button class="mini-btn mini-play" id="miniPlayBtn"><i class="fas fa-play"></i></button>
+            <button class="mini-btn" id="miniNextBtn"><i class="fas fa-step-forward"></i></button>
+        </div>
+        <div class="mini-extra">
+            <button class="mini-btn" id="miniExpandBtn"><i class="fas fa-chevron-up"></i></button>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">Added to favorites</span>
+    </div>
+
+    <audio id="audioPlayer" preload="metadata"></audio>
     <script src="script.js"></script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-# 🎬 Interactive Media Player
+# 🎬 Luminex Media Player
 
 <div align="center">
 
@@ -7,9 +7,9 @@
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 ![MIT License](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)
 
-**A beautiful, responsive, and feature-rich media player built with vanilla JavaScript**
+**A professional, interactive media player with stunning dark/light themes**
 
-[✨ Features](#-features) • [🚀 Demo](#-demo) • [📦 Installation](#-installation) • [🎮 Usage](#-usage) • [🤝 Contributing](#-contributing)
+[✨ Features](#-features) • [🚀 Demo](#-demo) • [📦 Installation](#-installation) • [⌨️ Shortcuts](#️-keyboard-shortcuts)
 
 </div>
 
@@ -17,51 +17,58 @@
 
 ## 🌟 Overview
 
-Interactive Media Player is a modern, responsive web-based media player that supports both video and audio files. Built with vanilla HTML, CSS, and JavaScript, it offers a sleek interface with advanced controls and smooth animations.
+Luminex is a modern, professional media player built with vanilla HTML, CSS, and JavaScript. Featuring a beautiful glassmorphism design, animated backgrounds, and comprehensive media controls for both video and audio playback.
 
 ## ✨ Features
 
-### 🎥 **Video & Audio Support**
-- 📹 Multiple video format support (MP4, WebM, OGG)
-- 🎵 Multiple audio format support (MP3, WAV, OGG)
-- 🔄 Seamless switching between media types
+### 🎥 **Video Player**
+- Full-featured video player with custom controls
+- Play/Pause, Previous/Next navigation
+- Volume control with mute toggle
+- Playback speed control (0.5x - 2x)
+- Fullscreen and Picture-in-Picture mode
+- Progress bar with seek functionality
+- 3 sample videos from Blender Foundation (Big Buck Bunny, Sintel, Elephants Dream)
 
-### 🎛️ **Advanced Controls**
-- ▶️ **Global Controls**: Play all videos/audios at once
-- ⏸️ **Individual Controls**: Control each media item separately
-- 🔇 **Mute/Unmute**: Global and individual mute functionality
-- 🔊 **Volume Control**: Precise volume adjustment with sliders
-- ⏹️ **Stop All**: Stop all playing media with one click
+### 🎵 **Audio Player**
+- Beautiful audio player with album art display
+- Animated vinyl record effect
+- Audio visualizer canvas
+- Shuffle and repeat modes
+- Track list with easy navigation
+- Volume slider control
+- 3 sample audio tracks from Archive.org
 
-### 🎨 **Beautiful Interface**
-- 🌈 Gradient backgrounds and modern design
-- 📱 Fully responsive layout for all devices
-- ✨ Smooth animations and transitions
-- 🎯 Interactive hover effects
-- 📊 Visual feedback for playing state
+### 🎨 **Stunning Interface**
+- **Dark/Light Theme Toggle** - Switch themes with one click
+- **Glassmorphism Design** - Modern translucent card effects
+- **Animated Background** - Floating particles and gradient animations
+- **Responsive Layout** - Works on desktop, tablet, and mobile
+- **Sidebar Navigation** - Quick access to Videos and Music sections
+- **Mini Player** - Persistent bottom bar for audio playback
 
-### ⌨️ **Keyboard Support**
-- `Space` - Play/Pause
-- `M` - Mute/Unmute
-- `↑/↓` - Volume control
-- `←/→` - Seek controls
+### ⚙️ **Settings Panel**
+- Autoplay next track toggle
+- Default volume control
+- Video quality selector
+- Animations toggle
+- Visualizer toggle
+- Clear favorites option
+- Reset to defaults
 
-### 🔧 **Developer-Friendly**
-- 📝 Clean, well-commented code
-- 🏗️ Modular architecture
-- 🎯 ES6+ JavaScript features
-- 📱 Mobile-first responsive design
+### 🔀 **Additional Features**
+- Global shuffle mode
+- Search functionality for videos and tracks
+- Grid/List view toggle for videos
+- Track options menu (play, queue, share)
+- Toast notifications
+- Keyboard shortcuts
 
 ## 🚀 Demo
 
-> **🌟 Live Demo**: [**Media Player**](https://media-player-ten-self.vercel.app/) 
-> 
-> *Experience the full functionality of the media player with live video and audio playback!*
+> **🌟 Live Demo**: [**Luminex Media Player**](https://media-player-ten-self.vercel.app/)
 
 ## 📦 Installation
-
-### 🌐 Try Online First!
-**Want to see it in action immediately?** Check out the [**Live Demo**](https://media-player-ten-self.vercel.app/) deployed on Vercel!
 
 ### Quick Start
 
@@ -71,172 +78,71 @@ Interactive Media Player is a modern, responsive web-based media player that sup
    cd Media-Player
    ```
 
-2. **Add your media files**
-   - Place your video files (1.mp4, 2.mp4, etc.) in the root directory
-   - Place your audio files (1.mp3, 2.mp3, etc.) in the root directory
-
-3. **Open in browser**
+2. **Open in browser**
    ```bash
    # Simply open index.html in your browser
-   # Or serve with a local server:
-   python -m http.server 8000
-   # Then visit: http://localhost:8000
+   # Or use a local server:
+   npx serve .
    ```
 
-### 📁 File Structure
+## ⌨️ Keyboard Shortcuts
+
+| Key | Action |
+|-----|--------|
+| `Space` | Play/Pause |
+| `←` / `→` | Seek backward/forward 10s |
+| `↑` / `↓` | Volume up/down |
+| `M` | Mute/Unmute |
+| `F` | Toggle fullscreen |
+| `N` | Next track/video |
+| `P` | Previous track/video |
+
+## 🛠️ Technologies
+
+- **HTML5** - Semantic markup with video/audio elements
+- **CSS3** - Custom properties, animations, glassmorphism, flexbox/grid
+- **JavaScript ES6+** - Class-based architecture, async/await, localStorage
+- **Font Awesome** - Icon library
+- **Google Fonts** - Inter & Poppins typography
+
+## 📁 Project Structure
+
 ```
 Media-Player/
-├── 📄 index.html          # Main HTML file
-├── 🎨 styles.css          # CSS styling
-├── ⚡ script.js           # JavaScript functionality
-├── 📋 README.md           # This file
-├── 📜 LICENSE             # MIT License
-├── 🎬 1.mp4, 2.mp4...     # Your video files
-└── 🎵 1.mp3, 2.mp3...     # Your audio files
+├── index.html      # Main HTML structure
+├── styles.css      # All styling (1500+ lines)
+├── script.js       # LuminexPlayer class & functionality
+├── favicon.svg     # Site favicon
+├── LICENSE         # MIT License
+└── README.md       # Documentation
 ```
 
-## 🎮 Usage
+## 🎯 Sample Media
 
-### Basic Usage
+### Videos (from Blender Foundation)
+- **Big Buck Bunny** (2008) - Animated comedy short
+- **Sintel** (2010) - Fantasy animated short
+- **Elephants Dream** (2006) - Surreal sci-fi short
 
-1. **Load Media**: Place your media files in the project directory
-2. **Open**: Launch `index.html` in your web browser
-3. **Enjoy**: Use the controls to play, pause, and manage your media
+### Audio (from Archive.org)
+- Tristram Theme - Blizzard Entertainment
+- Test Audio - Archive.org
+- Age of Empires II Menu - Microsoft
 
-### Global Controls
+## 📄 License
 
-| Button | Function |
-|--------|----------|
-| 🎬 **Play All Videos** | Plays all video files sequentially |
-| 🎵 **Play All Audios** | Plays all audio files sequentially |
-| ⏹️ **Stop All** | Stops all currently playing media |
-| 🔇 **Mute All** | Toggles mute for all media items |
-
-### Individual Controls
-
-Each media item has its own set of controls:
-- ▶️ **Play Button**: Start playback
-- ⏸️ **Pause Button**: Pause playback
-- 🔊 **Mute Button**: Toggle audio
-- 🎚️ **Volume Slider**: Adjust volume (0-100%)
-
-## 🛠️ Customization
-
-### Adding New Media
-
-To add new media files, simply:
-
-1. Place files in the root directory
-2. Update the HTML to include new media elements:
-
-```html
-<div class="media-item">
-    <video width="300" src="your-video.mp4" controls>
-        <source src="your-video.mp4" type="video/mp4">
-    </video>
-    <div class="media-info">
-        <h3>Your Video Title</h3>
-        <!-- Controls will be automatically added -->
-    </div>
-</div>
-```
-
-### Styling Customization
-
-The player uses CSS custom properties for easy theming:
-
-```css
-:root {
-    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    --accent-color: #ff6b6b;
-    --text-color: #333;
-    --border-radius: 15px;
-}
-```
-
-## 🌐 Browser Support
-
-| Browser | Supported Versions |
-|---------|-------------------|
-| 🌐 Chrome | 60+ |
-| 🦊 Firefox | 55+ |
-| 🧭 Safari | 12+ |
-| 📘 Edge | 79+ |
-
-## 📱 Responsive Design
-
-The media player is fully responsive and works seamlessly across:
-- 🖥️ **Desktop** (1200px+)
-- 💻 **Laptop** (768px - 1199px)
-- 📱 **Tablet** (481px - 767px)
-- 📱 **Mobile** (320px - 480px)
-
-## 🔧 Technical Details
-
-### Built With
-- **HTML5**: Semantic markup and media elements
-- **CSS3**: Flexbox, Grid, Custom Properties, Animations
-- **JavaScript ES6+**: Classes, Arrow Functions, Promises
-- **Font Awesome**: Beautiful icons
-
-### Key Features Implementation
-- **Object-Oriented Design**: Clean MediaPlayer class
-- **Event-Driven Architecture**: Efficient event handling
-- **Progressive Enhancement**: Works without JavaScript
-- **Accessibility**: Keyboard navigation and ARIA labels
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 🤝 Contributing
 
-Contributions are welcome! Here's how you can help:
-
-1. **Fork** the repository
-2. **Create** a feature branch (`git checkout -b feature/amazing-feature`)
-3. **Commit** your changes (`git commit -m 'Add amazing feature'`)
-4. **Push** to the branch (`git push origin feature/amazing-feature`)
-5. **Open** a Pull Request
-
-### Development Setup
-
-```bash
-# Clone your fork
-git clone https://github.com/yourusername/Media-Player.git
-
-# Create a feature branch
-git checkout -b feature/your-feature-name
-
-# Make your changes and test
-# Submit a pull request
-```
-
-## 📝 License
-
-This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
-
-## 👨‍💻 Author
-
-**Pushkar Kumar Saini**
-- GitHub: [@pushkarkumarsaini2006](https://github.com/pushkarkumarsaini2006)
-- Email: pushkarkumarsaini2006@gmail.com
-
-## 🙏 Acknowledgments
-
-- 🎨 **Font Awesome** for the beautiful icons
-- 🌈 **CSS Gradient** inspiration from various design resources
-- 🎵 **HTML5 Media API** for robust media support
-
-## 📊 Project Stats
-
-![GitHub stars](https://img.shields.io/github/stars/pushkarkumarsaini2006/Media-Player?style=social)
-![GitHub forks](https://img.shields.io/github/forks/pushkarkumarsaini2006/Media-Player?style=social)
-![GitHub issues](https://img.shields.io/github/issues/pushkarkumarsaini2006/Media-Player)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/pushkarkumarsaini2006/Media-Player)
+Contributions are welcome! Feel free to:
+- Report bugs
+- Suggest features
+- Submit pull requests
 
 ---
 
 <div align="center">
-
-**⭐ Star this repo if you find it helpful!**
-
-Made with ❤️ by [Pushkar Kumar Saini](https://github.com/pushkarkumarsaini2006)
-
+  <p>Made with ❤️ using vanilla HTML, CSS & JavaScript</p>
+  <p>⭐ Star this repo if you find it useful!</p>
 </div>
