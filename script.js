@@ -64,25 +64,25 @@ class LuminexPlayer {
         
         this.tracks = [
             {
-                src: 'https://archive.org/download/IGM-V7/IGM%20-%20Vol.%207/25%20Diablo%20-%20Tristram%20%28Blizzard%29.mp3',
-                title: 'Tristram Theme',
-                artist: 'Blizzard Entertainment',
+                src: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
+                title: 'Ambient Dreams',
+                artist: 'SoundHelix',
                 cover: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=300&h=300&fit=crop',
-                duration: '6:26'
+                duration: '6:13'
             },
             {
-                src: 'https://archive.org/download/testmp3testfile/mpthreetest.mp3',
-                title: 'Test Audio',
-                artist: 'Archive.org',
+                src: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',
+                title: 'Electronic Waves',
+                artist: 'SoundHelix',
                 cover: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=300&h=300&fit=crop',
-                duration: '0:12'
+                duration: '8:05'
             },
             {
-                src: 'https://archive.org/download/IGM-V7/IGM%20-%20Vol.%207/01%20Age%20Of%20Empires%20II%20-%20Menu%20%28Microsoft%29.mp3',
-                title: 'Age of Empires II Menu',
-                artist: 'Microsoft',
+                src: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3',
+                title: 'Chill Vibes',
+                artist: 'SoundHelix',
                 cover: 'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=300&h=300&fit=crop',
-                duration: '2:44'
+                duration: '5:42'
             }
         ];
         
@@ -399,7 +399,9 @@ class LuminexPlayer {
         progressBar?.addEventListener('click', (e) => {
             const rect = progressBar.getBoundingClientRect();
             const pos = (e.clientX - rect.left) / rect.width;
-            this.audioPlayer.currentTime = pos * this.audioPlayer.duration;
+            if (this.audioPlayer.duration && isFinite(this.audioPlayer.duration)) {
+                this.audioPlayer.currentTime = pos * this.audioPlayer.duration;
+            }
         });
         
         // Track ended

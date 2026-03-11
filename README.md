@@ -19,8 +19,8 @@ A professional, interactive media player with video and audio playback, featurin
 ### Videos (Blender Foundation)
 - Big Buck Bunny, Sintel, Elephants Dream
 
-### Audio (Archive.org)
-- Tristram Theme, Test Audio, Age of Empires II Menu
+### Audio (SoundHelix)
+- Ambient Dreams, Electronic Waves, Chill Vibes
 
 ## Keyboard Shortcuts
 
