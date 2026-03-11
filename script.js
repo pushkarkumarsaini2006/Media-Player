@@ -467,7 +467,6 @@ class LuminexPlayer {
     
     loadTrack(index) {
         const track = this.tracks[index];
-        this.audioPlayer.crossOrigin = 'anonymous';
         this.audioPlayer.src = track.src;
         this.audioPlayer.load();
         this.audioPlayer.volume = 0.8;
