@@ -31,58 +31,58 @@ class LuminexPlayer {
         // Media collections
         this.videos = [
             {
-                src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-                title: 'Big Buck Bunny',
-                description: 'A comedic animated short film featuring a giant rabbit dealing with bullying rodents.',
-                poster: 'https://peach.blender.org/wp-content/uploads/bbb-splash.png',
-                duration: '9:56',
-                views: '2.4M',
-                likes: '45K',
-                year: '2008'
-            },
-            {
-                src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4',
-                title: 'Sintel',
-                description: 'An epic animated short about a girl\'s quest to find her pet dragon in a fantasy world.',
-                poster: 'https://durian.blender.org/wp-content/uploads/2010/06/05.8b_comp_000272.jpg',
-                duration: '14:48',
-                views: '1.8M',
-                likes: '32K',
-                year: '2010'
-            },
-            {
-                src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
-                title: 'Elephants Dream',
-                description: 'The world\'s first open movie, a surreal science fiction story about two characters exploring a machine.',
-                poster: 'https://i.ytimg.com/vi/TLkA0RELQ1g/maxresdefault.jpg',
-                duration: '10:54',
+                src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
+                title: 'For Bigger Blazes',
+                description: 'HBO promo - A thrilling preview showcasing action-packed scenes.',
+                poster: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=800&h=450&fit=crop',
+                duration: '0:15',
                 views: '1.2M',
-                likes: '28K',
-                year: '2006'
+                likes: '24K',
+                year: '2014'
+            },
+            {
+                src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4',
+                title: 'For Bigger Escapes',
+                description: 'An exciting escape adventure showcasing dramatic moments.',
+                poster: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=800&h=450&fit=crop',
+                duration: '0:15',
+                views: '980K',
+                likes: '18K',
+                year: '2014'
+            },
+            {
+                src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4',
+                title: 'For Bigger Joyrides',
+                description: 'A fun and exciting joyride through amazing landscapes.',
+                poster: 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800&h=450&fit=crop',
+                duration: '0:15',
+                views: '750K',
+                likes: '15K',
+                year: '2014'
             }
         ];
         
         this.tracks = [
             {
-                src: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
-                title: 'Ambient Dreams',
-                artist: 'SoundHelix',
+                src: 'https://samplelib.com/lib/preview/mp3/sample-15s.mp3',
+                title: 'Upbeat Melody',
+                artist: 'Sample Library',
                 cover: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=300&h=300&fit=crop',
-                duration: '6:13'
+                duration: '0:15'
             },
             {
-                src: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',
-                title: 'Electronic Waves',
-                artist: 'SoundHelix',
+                src: 'https://samplelib.com/lib/preview/mp3/sample-12s.mp3',
+                title: 'Chill Beat',
+                artist: 'Sample Library',
                 cover: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=300&h=300&fit=crop',
-                duration: '8:05'
+                duration: '0:12'
             },
             {
-                src: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3',
-                title: 'Chill Vibes',
-                artist: 'SoundHelix',
+                src: 'https://samplelib.com/lib/preview/mp3/sample-9s.mp3',
+                title: 'Quick Groove',
+                artist: 'Sample Library',
                 cover: 'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=300&h=300&fit=crop',
-                duration: '5:42'
+                duration: '0:09'
             }
         ];
         

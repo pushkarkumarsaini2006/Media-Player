@@ -16,11 +16,11 @@ A professional, interactive media player with video and audio playback, featurin
 
 ## Media Included
 
-### Videos (Blender Foundation)
-- Big Buck Bunny, Sintel, Elephants Dream
+### Videos (Google Sample Videos)
+- For Bigger Blazes, For Bigger Escapes, For Bigger Joyrides
 
-### Audio (SoundHelix)
-- Ambient Dreams, Electronic Waves, Chill Vibes
+### Audio (Sample Library)
+- Upbeat Melody, Chill Beat, Quick Groove
 
 ## Keyboard Shortcuts
 
