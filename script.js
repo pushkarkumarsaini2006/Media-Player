@@ -22,6 +22,7 @@ class LuminexPlayer {
         this.currentTrackIndex = 0;
         this.isVideoPlaying = false;
         this.isAudioPlaying = false;
+        this.playPromise = null;
         this.playbackSpeed = 1;
         this.favorites = JSON.parse(localStorage.getItem('luminexFavorites')) || [];
         this.isShuffleOn = false;
@@ -409,17 +410,37 @@ class LuminexPlayer {
         });
     }
     
+    safePlayAudio() {
+        // Cancel any pending play promise
+        if (this.playPromise !== null) {
+            this.playPromise.catch(() => {}); // Ignore abort errors from previous play
+        }
+        
+        this.audioPlayer.muted = false;
+        this.audioPlayer.volume = 0.8;
+        
+        this.playPromise = this.audioPlayer.play();
+        return this.playPromise.then(() => {
+            this.playPromise = null;
+            return true;
+        }).catch(error => {
+            this.playPromise = null;
+            if (error.name === 'AbortError') {
+                // Play was interrupted by a new load/play request - this is expected
+                return false;
+            }
+            console.error('Audio play failed:', error);
+            return false;
+        });
+    }
+    
     toggleAudioPlay() {
         const playPauseBtn = document.getElementById('audioPlayPauseBtn');
         const miniPlayBtn = document.getElementById('miniPlayBtn');
         
         if (this.audioPlayer.paused) {
-            this.audioPlayer.muted = false;
-            this.audioPlayer.volume = 0.8;
-            
-            const playPromise = this.audioPlayer.play();
-            if (playPromise !== undefined) {
-                playPromise.then(() => {
+            this.safePlayAudio().then(success => {
+                if (success) {
                     this.isAudioPlaying = true;
                     playPauseBtn.innerHTML = '<i class="fas fa-pause" aria-hidden="true"></i>';
                     playPauseBtn.setAttribute('aria-label', 'Pause');
@@ -428,11 +449,8 @@ class LuminexPlayer {
                     miniPlayBtn.setAttribute('aria-label', 'Pause');
                     miniPlayBtn.setAttribute('aria-pressed', 'true');
                     this.startVisualizer();
-                }).catch(error => {
-                    console.error('Audio play failed:', error);
-                    this.showToast('Unable to play audio. Click again to retry.');
-                });
-            }
+                }
+            });
         } else {
             this.audioPlayer.pause();
             this.isAudioPlaying = false;
@@ -447,6 +465,7 @@ class LuminexPlayer {
     
     loadTrack(index) {
         const track = this.tracks[index];
+        this.audioPlayer.crossOrigin = 'anonymous';
         this.audioPlayer.src = track.src;
         this.audioPlayer.load();
         this.audioPlayer.volume = 0.8;
@@ -480,7 +499,7 @@ class LuminexPlayer {
         this.loadTrack(this.currentTrackIndex);
         
         if (this.isAudioPlaying) {
-            this.audioPlayer.play();
+            this.safePlayAudio();
         }
         
         this.showToast(`Now playing: ${this.tracks[this.currentTrackIndex].title}`);
@@ -529,7 +548,9 @@ class LuminexPlayer {
                 this.analyser.connect(this.audioContext.destination);
                 this.analyser.fftSize = 256;
             } catch (e) {
-                console.log('Audio context not supported');
+                // CORS or other audio context errors - visualizer won't work but audio will still play
+                console.log('Audio visualizer not available:', e.message);
+                this.drawDefaultVisualizer();
                 return;
             }
         }
@@ -623,7 +644,7 @@ class LuminexPlayer {
             const playTrack = () => {
                 this.currentTrackIndex = index;
                 this.loadTrack(index);
-                this.audioPlayer.play();
+                this.safePlayAudio();
                 this.isAudioPlaying = true;
                 const playPauseBtn = document.getElementById('audioPlayPauseBtn');
                 const miniPlayBtn = document.getElementById('miniPlayBtn');
@@ -747,7 +768,7 @@ class LuminexPlayer {
                 } else {
                     this.currentTrackIndex = item.index;
                     this.loadTrack(item.index);
-                    this.audioPlayer.play();
+                    this.safePlayAudio();
                     this.isAudioPlaying = true;
                     document.getElementById('audioPlayPauseBtn').innerHTML = '<i class="fas fa-pause"></i>';
                     // Switch to music section
@@ -1339,7 +1360,7 @@ class LuminexPlayer {
                 case 'play':
                     this.currentTrackIndex = trackIndex;
                     this.loadTrack(trackIndex);
-                    this.audioPlayer.play();
+                    this.safePlayAudio();
                     this.isAudioPlaying = true;
                     document.getElementById('audioPlayPauseBtn').innerHTML = '<i class="fas fa-pause"></i>';
                     document.getElementById('miniPlayBtn').innerHTML = '<i class="fas fa-pause"></i>';
@@ -1399,7 +1420,7 @@ class LuminexPlayer {
                 // Simulate playing a playlist
                 this.currentTrackIndex = 0;
                 this.loadTrack(0);
-                this.audioPlayer.play();
+                this.safePlayAudio();
                 this.isAudioPlaying = true;
                 document.getElementById('audioPlayPauseBtn').innerHTML = '<i class="fas fa-pause"></i>';
                 document.getElementById('miniPlayBtn').innerHTML = '<i class="fas fa-pause"></i>';
