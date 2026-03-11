@@ -31,58 +31,58 @@ class LuminexPlayer {
         // Media collections
         this.videos = [
             {
-                src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
-                title: 'For Bigger Blazes',
-                description: 'HBO promo - A thrilling preview showcasing action-packed scenes.',
-                poster: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=800&h=450&fit=crop',
-                duration: '0:15',
-                views: '1.2M',
-                likes: '24K',
+                src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4',
+                title: 'For Bigger Fun',
+                description: 'A playful and entertaining short showcasing vibrant visuals and upbeat energy.',
+                poster: 'https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=800&h=450&fit=crop',
+                duration: '1:00',
+                views: '1.5M',
+                likes: '30K',
                 year: '2014'
             },
             {
-                src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4',
-                title: 'For Bigger Escapes',
-                description: 'An exciting escape adventure showcasing dramatic moments.',
-                poster: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=800&h=450&fit=crop',
+                src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4',
+                title: 'For Bigger Meltdowns',
+                description: 'An intense and dramatic short filled with high-energy moments.',
+                poster: 'https://images.unsplash.com/photo-1518676590747-1e3dcf5a09be?w=800&h=450&fit=crop',
                 duration: '0:15',
-                views: '980K',
-                likes: '18K',
+                views: '890K',
+                likes: '22K',
                 year: '2014'
             },
             {
-                src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4',
-                title: 'For Bigger Joyrides',
-                description: 'A fun and exciting joyride through amazing landscapes.',
-                poster: 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800&h=450&fit=crop',
-                duration: '0:15',
-                views: '750K',
-                likes: '15K',
-                year: '2014'
+                src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4',
+                title: 'Subaru Outback Adventure',
+                description: 'A cinematic drive through streets and dirt roads in the Subaru Outback.',
+                poster: 'https://images.unsplash.com/photo-1502489597346-dad15683d4c2?w=800&h=450&fit=crop',
+                duration: '0:52',
+                views: '670K',
+                likes: '14K',
+                year: '2015'
             }
         ];
         
         this.tracks = [
             {
-                src: 'https://samplelib.com/lib/preview/mp3/sample-15s.mp3',
-                title: 'Upbeat Melody',
-                artist: 'Sample Library',
-                cover: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=300&h=300&fit=crop',
-                duration: '0:15'
+                src: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3',
+                title: 'Midnight Groove',
+                artist: 'SoundHelix',
+                cover: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=300&h=300&fit=crop',
+                duration: '5:52'
             },
             {
-                src: 'https://samplelib.com/lib/preview/mp3/sample-12s.mp3',
-                title: 'Chill Beat',
-                artist: 'Sample Library',
-                cover: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=300&h=300&fit=crop',
-                duration: '0:12'
+                src: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3',
+                title: 'Neon Pulse',
+                artist: 'SoundHelix',
+                cover: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=300&h=300&fit=crop',
+                duration: '6:06'
             },
             {
-                src: 'https://samplelib.com/lib/preview/mp3/sample-9s.mp3',
-                title: 'Quick Groove',
-                artist: 'Sample Library',
-                cover: 'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=300&h=300&fit=crop',
-                duration: '0:09'
+                src: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3',
+                title: 'Sunset Drive',
+                artist: 'SoundHelix',
+                cover: 'https://images.unsplash.com/photo-1507838153414-b4b713384a76?w=300&h=300&fit=crop',
+                duration: '5:48'
             }
         ];
         

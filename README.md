@@ -17,10 +17,10 @@ A professional, interactive media player with video and audio playback, featurin
 ## Media Included
 
 ### Videos (Google Sample Videos)
-- For Bigger Blazes, For Bigger Escapes, For Bigger Joyrides
+- For Bigger Fun, For Bigger Meltdowns, Subaru Outback Adventure
 
-### Audio (Sample Library)
-- Upbeat Melody, Chill Beat, Quick Groove
+### Audio (SoundHelix)
+- Midnight Groove, Neon Pulse, Sunset Drive
 
 ## Keyboard Shortcuts
 
