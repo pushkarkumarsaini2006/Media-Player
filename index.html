@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Luminex Media Player - A modern web-based media player for videos and music with custom playlists, visualizer, and beautiful UI. Play, organize, and enjoy your media collection.">
+    <title>Luminex Media Player</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>">
+    
+    <!-- Preconnect to external origins for faster resource loading -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://interactive-examples.mdn.mozilla.net">
+    <link rel="preconnect" href="https://www.w3schools.com">
+    
+    <!-- Critical CSS -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Font Awesome with font-display swap via media="print" trick for non-blocking load -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    
+    <!-- Google Fonts with font-display swap -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap"></noscript>
+</head>
+<body>
+    <!-- Skip Link for Keyboard Users -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <!-- Animated Background (decorative) -->
+    <div class="bg-animation" aria-hidden="true">
+        <div class="bg-gradient"></div>
+        <div class="floating-particles"></div>
+    </div>
+
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" role="complementary" aria-label="Media navigation">
+            <div class="logo">
+                <div class="logo-icon" aria-hidden="true">
+                    <i class="fas fa-compact-disc"></i>
+                </div>
+                <span class="logo-text">Luminex</span>
+            </div>
+            
+            <nav class="nav-menu" aria-label="Main navigation">
+                <a href="#videos-section" class="nav-item active" data-section="videos" aria-current="page">
+                    <i class="fas fa-film" aria-hidden="true"></i>
+                    <span>Videos</span>
+                </a>
+                <a href="#music-section" class="nav-item" data-section="music">
+                    <i class="fas fa-headphones" aria-hidden="true"></i>
+                    <span>Music</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer" aria-hidden="true">
+                <div class="equalizer">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+                <p class="now-playing-label">Now Playing</p>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content" id="main-content" role="main">
+            <!-- Header -->
+            <header class="header" role="banner">
+                <div class="search-bar" role="search">
+                    <i class="fas fa-search" aria-hidden="true"></i>
+                    <input type="search" placeholder="Search media..." id="searchInput" aria-label="Search media">
+                </div>
+                <div class="header-actions" role="toolbar" aria-label="Page actions">
+                    <button class="icon-btn" id="themeToggle" aria-label="Toggle dark/light theme" aria-pressed="false">
+                        <i class="fas fa-moon" aria-hidden="true"></i>
+                    </button>
+                    <button class="icon-btn" id="shuffleBtn" aria-label="Toggle shuffle mode" aria-pressed="false">
+                        <i class="fas fa-random" aria-hidden="true"></i>
+                    </button>
+                    <button class="icon-btn" id="settingsBtn" aria-label="Open settings" aria-expanded="false">
+                        <i class="fas fa-cog" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Video Section -->
+            <section class="content-section active" id="videos-section" aria-labelledby="videos-heading">
+                <div class="section-header">
+                    <h2 id="videos-heading"><i class="fas fa-play-circle" aria-hidden="true"></i> Featured Videos</h2>
+                    <div class="view-toggle" role="group" aria-label="View options">
+                        <button class="view-btn active" data-view="grid" aria-label="Grid view" aria-pressed="true"><i class="fas fa-th-large" aria-hidden="true"></i></button>
+                        <button class="view-btn" data-view="list" aria-label="List view" aria-pressed="false"><i class="fas fa-list" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+
+                <!-- Featured Video Player -->
+                <div class="featured-player" id="mainVideoPlayer" role="region" aria-label="Video player">
+                    <div class="video-wrapper">
+                        <video id="mainVideo" poster="https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800&h=450&fit=crop" fetchpriority="high" aria-label="Main video player">
+                            <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-overlay">
+                            <button class="big-play-btn" id="bigPlayBtn" aria-label="Play video">
+                                <i class="fas fa-play" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                        <div class="video-controls" role="toolbar" aria-label="Video controls">
+                            <div class="progress-container">
+                                <div class="progress-bar" id="videoProgress" role="slider" aria-label="Video progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+                                    <div class="progress-filled"></div>
+                                    <div class="progress-thumb" aria-hidden="true"></div>
+                                </div>
+                            </div>
+                            <div class="controls-row">
+                                <div class="controls-left">
+                                    <button class="control-btn" id="playPauseBtn" aria-label="Play" aria-pressed="false">
+                                        <i class="fas fa-play" aria-hidden="true"></i>
+                                    </button>
+                                    <button class="control-btn" id="prevVideoBtn" aria-label="Previous video">
+                                        <i class="fas fa-step-backward" aria-hidden="true"></i>
+                                    </button>
+                                    <button class="control-btn" id="nextVideoBtn" aria-label="Next video">
+                                        <i class="fas fa-step-forward" aria-hidden="true"></i>
+                                    </button>
+                                    <div class="volume-control" role="group" aria-label="Volume controls">
+                                        <button class="control-btn" id="muteBtn" aria-label="Mute" aria-pressed="false">
+                                            <i class="fas fa-volume-up" aria-hidden="true"></i>
+                                        </button>
+                                        <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="80" aria-label="Volume level">
+                                    </div>
+                                    <span class="time-display" aria-live="polite" aria-atomic="true">
+                                        <span id="currentTime">0:00</span> / <span id="duration">0:00</span>
+                                    </span>
+                                </div>
+                                <div class="controls-right">
+                                    <button class="control-btn" id="pipBtn" aria-label="Picture in Picture">
+                                        <i class="fas fa-clone" aria-hidden="true"></i>
+                                    </button>
+                                    <button class="control-btn" id="speedBtn" aria-label="Playback speed: 1x">
+                                        <span class="speed-label">1x</span>
+                                    </button>
+                                    <button class="control-btn" id="fullscreenBtn" aria-label="Enter fullscreen">
+                                        <i class="fas fa-expand" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <h3 id="videoTitle" aria-live="polite">Flower Motion</h3>
+                        <p id="videoDescription">A calm macro nature clip with smooth camera motion and vivid color.</p>
+                        <div class="video-meta">
+                            <span><i class="fas fa-eye" aria-hidden="true"></i> <span class="visually-hidden">Views:</span> 920K views</span>
+                            <span><i class="fas fa-clock" aria-hidden="true"></i> <span class="visually-hidden">Duration:</span> 0:30</span>
+                            <span><i class="fas fa-calendar" aria-hidden="true"></i> <span class="visually-hidden">Year:</span> 2020</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video Grid -->
+                <div class="media-grid" id="videoGrid" role="list" aria-label="Video library">
+                    <article class="media-card" data-src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" data-title="Flower Motion" data-desc="A calm macro nature clip with smooth camera motion and vivid color." role="listitem" tabindex="0">
+                        <div class="card-thumbnail">
+                            <img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800&h=450&fit=crop" alt="Flower Motion thumbnail">
+                            <div class="card-overlay">
+                                <button class="play-btn" aria-label="Play Flower Motion"><i class="fas fa-play" aria-hidden="true"></i></button>
+                            </div>
+                            <span class="duration-badge" aria-label="Duration 30 seconds">0:30</span>
+                        </div>
+                        <div class="card-info">
+                            <h4>Flower Motion</h4>
+                            <p>MDN Media Samples</p>
+                            <div class="card-stats">
+                                <span><i class="fas fa-eye" aria-hidden="true"></i> <span class="visually-hidden">Views:</span> 920K</span>
+                                <span><i class="fas fa-heart" aria-hidden="true"></i> <span class="visually-hidden">Likes:</span> 18K</span>
+                            </div>
+                        </div>
+                        <button class="favorite-btn" aria-label="Add Flower Motion to favorites" aria-pressed="false"><i class="far fa-heart" aria-hidden="true"></i></button>
+                    </article>
+
+                    <article class="media-card" data-src="https://www.w3schools.com/html/mov_bbb.mp4" data-title="Big Buck Clip" data-desc="A short animated clip used widely for browser media demos." role="listitem" tabindex="0">
+                        <div class="card-thumbnail">
+                            <img src="https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?w=800&h=450&fit=crop" alt="Big Buck Clip thumbnail" loading="lazy" decoding="async">
+                            <div class="card-overlay">
+                                <button class="play-btn" aria-label="Play Big Buck Clip"><i class="fas fa-play" aria-hidden="true"></i></button>
+                            </div>
+                            <span class="duration-badge" aria-label="Duration 10 seconds">0:10</span>
+                        </div>
+                        <div class="card-info">
+                            <h4>Big Buck Clip</h4>
+                            <p>W3Schools Media</p>
+                            <div class="card-stats">
+                                <span><i class="fas fa-eye" aria-hidden="true"></i> <span class="visually-hidden">Views:</span> 1.1M</span>
+                                <span><i class="fas fa-heart" aria-hidden="true"></i> <span class="visually-hidden">Likes:</span> 24K</span>
+                            </div>
+                        </div>
+                        <button class="favorite-btn" aria-label="Add Big Buck Clip to favorites" aria-pressed="false"><i class="far fa-heart" aria-hidden="true"></i></button>
+                    </article>
+
+                    <article class="media-card" data-src="https://samplelib.com/lib/preview/mp4/sample-5s.mp4" data-title="Sample Reel" data-desc="A short sample reel for testing quick playback and controls." role="listitem" tabindex="0">
+                        <div class="card-thumbnail">
+                            <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=800&h=450&fit=crop" alt="Sample Reel thumbnail" loading="lazy" decoding="async">
+                            <div class="card-overlay">
+                                <button class="play-btn" aria-label="Play Sample Reel"><i class="fas fa-play" aria-hidden="true"></i></button>
+                            </div>
+                            <span class="duration-badge" aria-label="Duration 5 seconds">0:05</span>
+                        </div>
+                        <div class="card-info">
+                            <h4>Sample Reel</h4>
+                            <p>Samplelib</p>
+                            <div class="card-stats">
+                                <span><i class="fas fa-eye" aria-hidden="true"></i> <span class="visually-hidden">Views:</span> 640K</span>
+                                <span><i class="fas fa-heart" aria-hidden="true"></i> <span class="visually-hidden">Likes:</span> 11K</span>
+                            </div>
+                        </div>
+                        <button class="favorite-btn" aria-label="Add Sample Reel to favorites" aria-pressed="false"><i class="far fa-heart" aria-hidden="true"></i></button>
+                    </article>
+                </div>
+            </section>
+
+            <!-- Music Section -->
+            <section class="content-section" id="music-section" aria-labelledby="music-heading" hidden>
+                <div class="section-header">
+                    <h2 id="music-heading"><i class="fas fa-music" aria-hidden="true"></i> Music Library</h2>
+                </div>
+
+                <!-- Audio Player -->
+                <div class="audio-player-container" role="region" aria-label="Audio player">
+                    <div class="album-art">
+                        <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=300&h=300&fit=crop" alt="Album artwork" id="albumArt" loading="lazy" decoding="async">
+                        <div class="vinyl-record" aria-hidden="true"></div>
+                    </div>
+                    <div class="audio-details">
+                        <h3 id="trackTitle" aria-live="polite">Pulse One</h3>
+                        <p id="trackArtist" aria-live="polite">SoundHelix</p>
+                        <div class="audio-visualizer" aria-hidden="true">
+                            <canvas id="visualizer"></canvas>
+                        </div>
+                        <div class="audio-progress" role="group" aria-label="Audio progress">
+                            <span id="audioCurrentTime" aria-live="off">0:00</span>
+                            <div class="audio-progress-bar" id="audioProgress" role="slider" aria-label="Audio progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+                                <div class="audio-progress-filled"></div>
+                            </div>
+                            <span id="audioDuration">0:00</span>
+                        </div>
+                        <div class="audio-controls" role="toolbar" aria-label="Audio playback controls">
+                            <button class="audio-btn" id="shuffleAudioBtn" aria-label="Shuffle" aria-pressed="false">
+                                <i class="fas fa-random" aria-hidden="true"></i>
+                            </button>
+                            <button class="audio-btn" id="prevAudioBtn" aria-label="Previous track">
+                                <i class="fas fa-step-backward" aria-hidden="true"></i>
+                            </button>
+                            <button class="audio-btn play-pause-main" id="audioPlayPauseBtn" aria-label="Play" aria-pressed="false">
+                                <i class="fas fa-play" aria-hidden="true"></i>
+                            </button>
+                            <button class="audio-btn" id="nextAudioBtn" aria-label="Next track">
+                                <i class="fas fa-step-forward" aria-hidden="true"></i>
+                            </button>
+                            <button class="audio-btn" id="repeatAudioBtn" aria-label="Repeat" aria-pressed="false">
+                                <i class="fas fa-redo" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                        <div class="audio-volume" role="group" aria-label="Volume control">
+                            <i class="fas fa-volume-down" aria-hidden="true"></i>
+                            <input type="range" id="audioVolumeSlider" min="0" max="100" value="80" aria-label="Audio volume">
+                            <i class="fas fa-volume-up" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Track List -->
+                <div class="track-list" id="trackList" role="list" aria-label="Music tracks">
+                    <div class="track-item active" data-src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" data-title="Pulse One" data-artist="SoundHelix" data-cover="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=300&h=300&fit=crop" role="listitem" tabindex="0" aria-current="true">
+                        <div class="track-number" aria-hidden="true">
+                            <span class="num">1</span>
+                            <i class="fas fa-play playing-icon"></i>
+                        </div>
+                        <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=50&h=50&fit=crop" alt="Pulse One album art" loading="lazy" decoding="async">
+                        <div class="track-info">
+                            <h5>Pulse One</h5>
+                            <p>SoundHelix</p>
+                        </div>
+                        <span class="track-duration"><span class="visually-hidden">Duration:</span> 6:13</span>
+                        <button class="track-options" aria-label="More options for Pulse One" aria-haspopup="menu"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></button>
+                    </div>
+
+                    <div class="track-item" data-src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" data-title="Pulse Two" data-artist="SoundHelix" data-cover="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=300&h=300&fit=crop" role="listitem" tabindex="0">
+                        <div class="track-number" aria-hidden="true">
+                            <span class="num">2</span>
+                            <i class="fas fa-play playing-icon"></i>
+                        </div>
+                        <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=50&h=50&fit=crop" alt="Pulse Two album art" loading="lazy" decoding="async">
+                        <div class="track-info">
+                            <h5>Pulse Two</h5>
+                            <p>SoundHelix</p>
+                        </div>
+                        <span class="track-duration"><span class="visually-hidden">Duration:</span> 5:31</span>
+                        <button class="track-options" aria-label="More options for Pulse Two" aria-haspopup="menu"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></button>
+                    </div>
+
+                    <div class="track-item" data-src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" data-title="Pulse Three" data-artist="SoundHelix" data-cover="https://images.unsplash.com/photo-1507838153414-b4b713384a76?w=300&h=300&fit=crop" role="listitem" tabindex="0">
+                        <div class="track-number" aria-hidden="true">
+                            <span class="num">3</span>
+                            <i class="fas fa-play playing-icon"></i>
+                        </div>
+                        <img src="https://images.unsplash.com/photo-1507838153414-b4b713384a76?w=50&h=50&fit=crop" alt="Pulse Three album art" loading="lazy" decoding="async">
+                        <div class="track-info">
+                            <h5>Pulse Three</h5>
+                            <p>SoundHelix</p>
+                        </div>
+                        <span class="track-duration"><span class="visually-hidden">Duration:</span> 5:03</span>
+                        <button class="track-options" aria-label="More options for Pulse Three" aria-haspopup="menu"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+            </section>
+
+
+        </main>
+    </div>
+
+    <!-- Mini Player (Bottom Bar) -->
+    <div class="mini-player" id="miniPlayer" role="region" aria-label="Mini player">
+        <div class="mini-progress" role="progressbar" aria-label="Track progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+            <div class="mini-progress-filled"></div>
+        </div>
+        <div class="mini-info">
+            <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=50&h=50&fit=crop" alt="Now playing album art" id="miniCover" loading="lazy" decoding="async">
+            <div class="mini-text">
+                <span class="mini-title" id="miniTitle" aria-live="polite">Pulse One</span>
+                <span class="mini-artist" id="miniArtist">SoundHelix</span>
+            </div>
+        </div>
+        <div class="mini-controls" role="toolbar" aria-label="Mini player controls">
+            <button class="mini-btn" id="miniPrevBtn" aria-label="Previous track"><i class="fas fa-step-backward" aria-hidden="true"></i></button>
+            <button class="mini-btn mini-play" id="miniPlayBtn" aria-label="Play" aria-pressed="false"><i class="fas fa-play" aria-hidden="true"></i></button>
+            <button class="mini-btn" id="miniNextBtn" aria-label="Next track"><i class="fas fa-step-forward" aria-hidden="true"></i></button>
+        </div>
+        <div class="mini-extra">
+            <button class="mini-btn" id="miniExpandBtn" aria-label="Expand player" aria-expanded="false"><i class="fas fa-chevron-up" aria-hidden="true"></i></button>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true">
+        <i class="fas fa-check-circle" aria-hidden="true"></i>
+        <span id="toastMessage">Added to favorites</span>
+    </div>
+
+    <audio id="audioPlayer" preload="metadata"></audio>
+    <script src="script.js"></script>
+</body>
+</html>
